@@ -44,7 +44,7 @@ export const RECIPES = {
       { item: "Onion, diced", amount: "200 g", group: "vegetables" },
       { item: "Capers and olives", amount: "90 g", group: "vegetables" },
       { item: "Olive oil", amount: "60 g", group: "plantOils" },
-      { item: "Parmesan, grated", amount: "40 g", group: "dairy" },
+      { item: "Parmesan, grated", amount: "40 g (×7 = 280 milk-eq)", group: "dairy" },
       { item: "Calabrian chili, garlic", amount: "to taste" },
     ],
     steps: [

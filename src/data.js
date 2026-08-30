@@ -166,8 +166,8 @@ export const SEED_DISHES = [
   },
   {
     id: "puttanesca", source: "home", name: "Field Roast puttanesca",
-    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili, parmesan.",
-    comp: { ...EMPTY, vegetables: 235, dairy: 10, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
+    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili, parmesan. The 40 g of parmesan across four servings is hard cheese at ×7, so it counts as 70 g milk-eq per serving rather than the 10 g entered before.",
+    comp: { ...EMPTY, vegetables: 235, dairy: 70, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
   },
   {
     id: "sundubu", source: "restaurant", name: "Sundubu jjigae",
