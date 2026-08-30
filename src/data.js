@@ -56,7 +56,7 @@ export const KCAL_PER_G = {
   redMeat: 2.5, poultry: 1.9, fish: 1.6, eggs: 1.45,
   addedSugar: 4.0, animalTropFat: 8.0, ultraProcessed: 4.0,
   // inert starches
-  whiteRice: 1.30, riceNoodles: 1.10, refinedBread: 2.70,
+  whiteRice: 1.30, riceNoodles: 1.10, refinedBread: 2.70, refinedStarch: 3.50,
 };
 
 /* Inert foods — the refined starches the taxonomy has no slot for. They earn
@@ -67,6 +67,7 @@ export const INERT = [
   { id: "whiteRice", label: "White rice", short: "Rice", unit: "g cooked" },
   { id: "riceNoodles", label: "Rice noodles", short: "Noodles", unit: "g cooked" },
   { id: "refinedBread", label: "Refined bread & pita", short: "Bread", unit: "g" },
+  { id: "refinedStarch", label: "Refined starch & coatings", short: "Starch", unit: "g dry" },
 ];
 
 /* Bridge foods — inert under strict EAT-Lancet taxonomy, partially
@@ -176,7 +177,7 @@ export const EMPTY = {
   wholeGrains: 0, legumes: 0, vegetables: 0, fruits: 0, nuts: 0, dairy: 0,
   plantOils: 0, tubers: 0,
   refinedPasta: 0, fieldRoast: 0, beyond: 0,
-  whiteRice: 0, riceNoodles: 0, refinedBread: 0,
+  whiteRice: 0, riceNoodles: 0, refinedBread: 0, refinedStarch: 0,
   redMeat: 0, poultry: 0, fish: 0, eggs: 0, addedSugar: 0, animalTropFat: 0, ultraProcessed: 0,
 };
 
@@ -242,8 +243,8 @@ export const SEED_DISHES = [
   },
   {
     id: "gochujangTofu", source: "home", name: "Gochujang crispy tofu bowl",
-    note: "Crisped tofu in potato starch, gochujang-soy glaze, dressed broccoli and sesame seeds.",
-    comp: { ...EMPTY, legumes: 175, vegetables: 200, nuts: 5, addedSugar: 12, plantOils: 12, whiteRice: 200 },
+    note: "Baked tofu in potato starch, gochujang-soy-corn syrup glaze, dressed broccoli and sesame seeds, over rice. No egg.",
+    comp: { ...EMPTY, legumes: 132, vegetables: 226, nuts: 4, addedSugar: 11, plantOils: 11, refinedStarch: 13, whiteRice: 210 },
   },
   {
     id: "pho", source: "home", name: "Veggie pho with tofu",
