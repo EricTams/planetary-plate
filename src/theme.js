@@ -37,6 +37,7 @@ export const WARM = [
 export const NEUTRAL = {
   bridge: "#7E8AA0",
   meat: "#8A7F6B",
+  inert: "#B7BDAE", // refined starch: present and eaten, but earning nothing
 };
 
 export const FONT = {

@@ -1,8 +1,8 @@
 import { useMemo, useState } from "react";
 import { T, FONT, label, input, panel, toggle } from "./theme.js";
 import {
-  PROMOTE, CAPS, BRIDGE, POSITIVE_BARS, NEGATIVE_BARS, barColor,
-  DEFAULT_WEIGHTS, DEFAULT_SETTINGS, SEED_DISHES, TARGET_DAY_KCAL,
+  PROMOTE, CAPS, BRIDGE, INERT, POSITIVE_BARS, NEGATIVE_BARS, barColor,
+  DEFAULT_WEIGHTS, DEFAULT_SETTINGS, SEED_DISHES, TARGET_DAY_KCAL, KCAL_PER_G,
 } from "./data.js";
 import { scoreDish, energyBreakdown, fmtPct, cappedAmount } from "./scoring.js";
 import Profile from "./Profile.jsx";
@@ -106,15 +106,12 @@ function Stat({ name, value, caption, color, emphasis }) {
   );
 }
 
-/* Tracked vs untracked energy for one portion. Segments are the entered food
-   groups in ramp order; the hatched tail is the budget the composition does
-   not account for. */
+/* What is in this dish, by energy. Every segment is something actually eaten,
+   sized by the calories it contributes; nothing is inferred or left over. */
 function EnergyBar({ energy }) {
   const tip = useTip();
-  const w = (kcal) => `${(kcal / energy.span) * 100}%`;
-  const share = energy.budget > 0 ? energy.tracked / energy.budget : 0;
-
   const upfColor = barColor("ultraProcessed");
+  const w = (kcal) => `${(kcal / energy.total) * 100}%`;
 
   return (
     <div>
@@ -138,16 +135,14 @@ function EnergyBar({ energy }) {
       )}
 
       <div style={{ ...label, display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
-        <span>Tracked energy</span>
+        <span>In this dish</span>
         <span style={{ fontFamily: FONT.mono, textTransform: "none", letterSpacing: 0 }}>
-          {energy.auto
-            ? `${Math.round(energy.tracked)} kcal · ${fmtPct(energy.portion)} of a day`
-            : `${Math.round(energy.tracked)} of ${Math.round(energy.budget)} kcal · ${fmtPct(share)}`}
+          {Math.round(energy.total)} kcal · {fmtPct(energy.portion)} of a day
         </span>
       </div>
 
       <div style={{
-        position: "relative", display: "flex", height: 22, borderRadius: 4,
+        display: "flex", height: 22, borderRadius: 4,
         overflow: "hidden", border: `1px solid ${T.hair}`, background: T.panel,
       }}>
         {energy.parts.map((p) => (
@@ -158,7 +153,10 @@ function EnergyBar({ energy }) {
                   ? `${Math.round(p.credit * 100)}% credited to ${p.creditsToLabel.toLowerCase()} — the filled part\n` +
                     `the remaining ${Math.round((1 - p.credit) * 100)}% counts as nothing`
                   : `inert in strict mode — no credit to ${p.creditsToLabel.toLowerCase()}`)
-              : `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.tracked)} of what is tracked`)}
+              : p.inert
+                ? `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.total)} of the dish\n` +
+                  `refined starch — earns no group credit and hits no ceiling, but takes up the day like anything else`
+                : `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.total)} of the dish`)}
             style={{ width: w(p.kcal), background: p.color, position: "relative", cursor: "help" }}>
             {/* a bridge food fills from the bottom in its category's colour, to
                 the height of the credit it actually earns */}
@@ -170,24 +168,7 @@ function EnergyBar({ energy }) {
             )}
           </div>
         ))}
-        {energy.untracked > 0 && (
-          <div {...tip(`Inert food · ~${Math.round(energy.untracked)} kcal\n` +
-              `white rice, bread, pita and noodles — neither credited nor capped`)}
-            style={{
-              width: w(energy.untracked),
-              cursor: "help",
-              background: `repeating-linear-gradient(45deg, ${T.hair} 0 5px, ${T.panel} 5px 10px)`,
-            }} />
-        )}
-        {energy.over > 0 && (
-          <div {...tip(`Portion budget · ${Math.round(energy.budget)} kcal`)}
-            style={{
-              position: "absolute", top: 0, bottom: 0, left: w(energy.budget),
-              width: 2, background: T.ink,
-            }} />
-        )}
       </div>
-
     </div>
   );
 }
@@ -454,6 +435,26 @@ function Plate() {
                               ? `+${Math.round(credit * (selected.comp[b.id] || 0))} g to ${to} (${Math.round(credit * 100)}%)`
                               : "inert in strict mode"}
                             {b.upfFraction ? ` · ${Math.round(b.upfFraction * 100)}% counts as ultra-processed` : ""}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  <div style={{ ...label, margin: "16px 0 8px" }}>Inert starches</div>
+                  {INERT.map((i) => {
+                    const kcal = (selected.comp[i.id] || 0) * KCAL_PER_G[i.id];
+                    return (
+                      <div key={i.id} style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+                        <input type="number" min="0" value={selected.comp[i.id]}
+                          onChange={(e) => updateComp(selected.id, i.id, e.target.value)}
+                          style={input} aria-label={i.label} />
+                        <div style={{ flex: 1, fontSize: 13 }}>
+                          {i.label} <span style={{ color: T.muted, fontSize: 11 }}>({i.unit})</span>
+                          <div style={{ fontSize: 11, color: T.muted, marginTop: 1 }}>
+                            {kcal > 0.5
+                              ? `${Math.round(kcal)} kcal · earns nothing, but takes up the day`
+                              : "no group credit, no ceiling"}
                           </div>
                         </div>
                       </div>

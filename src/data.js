@@ -55,7 +55,19 @@ export const KCAL_PER_G = {
   // capped groups entered on their own
   redMeat: 2.5, poultry: 1.9, fish: 1.6, eggs: 1.45,
   addedSugar: 4.0, animalTropFat: 8.0, ultraProcessed: 4.0,
+  // inert starches
+  whiteRice: 1.30, riceNoodles: 1.10, refinedBread: 2.70,
 };
+
+/* Inert foods — the refined starches the taxonomy has no slot for. They earn
+   no group credit and hit no ceiling, but they are eaten, so they carry their
+   energy and take up room in the day like anything else. Leaving them out made
+   a bowl of noodles cost nothing at all. */
+export const INERT = [
+  { id: "whiteRice", label: "White rice", short: "Rice", unit: "g cooked" },
+  { id: "riceNoodles", label: "Rice noodles", short: "Noodles", unit: "g cooked" },
+  { id: "refinedBread", label: "Refined bread & pita", short: "Bread", unit: "g" },
+];
 
 /* Bridge foods — inert under strict EAT-Lancet taxonomy, partially
    credited in evidence-adjusted mode:
@@ -120,6 +132,7 @@ export const ENERGY_GROUPS = [
   ...NEGATIVE_BARS.map((c) => ({ id: c.from || c.id, label: c.label, color: c.color })),
   ...CAPS.filter((c) => ["redMeat", "poultry", "fish"].includes(c.id))
     .map((c) => ({ id: c.id, label: c.label, color: NEUTRAL.meat })),
+  ...INERT.map((i) => ({ id: i.id, label: i.label, color: NEUTRAL.inert, inert: true })),
 ];
 
 /* Colour for any group id. ENERGY_GROUPS is keyed by composition field, so
@@ -138,6 +151,7 @@ export const EMPTY = {
   wholeGrains: 0, legumes: 0, vegetables: 0, fruits: 0, nuts: 0, dairy: 0,
   plantOils: 0, tubers: 0,
   refinedPasta: 0, fieldRoast: 0, beyond: 0,
+  whiteRice: 0, riceNoodles: 0, refinedBread: 0,
   redMeat: 0, poultry: 0, fish: 0, eggs: 0, addedSugar: 0, animalTropFat: 0, ultraProcessed: 0,
 };
 
@@ -189,12 +203,12 @@ export const SEED_DISHES = [
   {
     id: "sundubu", source: "home", name: "Sundubu jjigae",
     note: "Soft tofu, kimchi and vegetables, no egg, with rice alongside.",
-    comp: { ...EMPTY, legumes: 280, vegetables: 160, plantOils: 8 },
+    comp: { ...EMPTY, legumes: 280, vegetables: 160, plantOils: 8, whiteRice: 200 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
     note: "Tofu, doubanjiang, scallion, sweet peas and Beyond crumbles in place of pork.",
-    comp: { ...EMPTY, legumes: 200, vegetables: 60, beyond: 57, plantOils: 15 },
+    comp: { ...EMPTY, legumes: 200, vegetables: 60, beyond: 57, plantOils: 15, whiteRice: 200 },
   },
   {
     id: "chili", source: "home", name: "Beyond & three-bean chili",
@@ -204,27 +218,27 @@ export const SEED_DISHES = [
   {
     id: "gochujangTofu", source: "home", name: "Gochujang crispy tofu bowl",
     note: "Crisped tofu in potato starch, gochujang-soy glaze, dressed broccoli and sesame seeds.",
-    comp: { ...EMPTY, legumes: 175, vegetables: 200, nuts: 5, addedSugar: 12, plantOils: 12 },
+    comp: { ...EMPTY, legumes: 175, vegetables: 200, nuts: 5, addedSugar: 12, plantOils: 12, whiteRice: 200 },
   },
   {
     id: "pho", source: "home", name: "Veggie pho with tofu",
     note: "Veggie broth, tofu, straw mushrooms, bean sprouts, herbs and the fixins. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit.",
-    comp: { ...EMPTY, legumes: 150, vegetables: 140, addedSugar: 5, plantOils: 3 },
+    comp: { ...EMPTY, legumes: 150, vegetables: 140, addedSugar: 5, plantOils: 3, riceNoodles: 200 },
   },
   {
     id: "cashewTofu", source: "restaurant", name: "Cashew tofu stir-fry",
     note: "Tofu, cashews, bell pepper, celery, onion and a soy-based sauce.",
-    comp: { ...EMPTY, legumes: 180, vegetables: 140, nuts: 30, addedSugar: 10, plantOils: 20 },
+    comp: { ...EMPTY, legumes: 180, vegetables: 140, nuts: 30, addedSugar: 10, plantOils: 20, whiteRice: 200 },
   },
   {
     id: "vegThali", source: "restaurant", name: "Veg thali with raita",
-    note: "Dal, sabzi, aloo, roti, raita, papad, pickle and salad, with ghee across the tray.",
-    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 150, tubers: 70, dairy: 80, plantOils: 26, animalTropFat: 8 },
+    note: "Dal, sabzi, aloo, roti, rice, raita, papad, pickle and salad, with ghee across the tray.",
+    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 150, tubers: 70, dairy: 80, plantOils: 26, animalTropFat: 8, whiteRice: 150 },
   },
   {
     id: "mezze", source: "restaurant", name: "Vegan mezze + falafel",
     note: "Falafel, hummus, mercimek köfte, salad, walnut muhammara and olives.",
-    comp: { ...EMPTY, legumes: 200, vegetables: 110, nuts: 15, plantOils: 28 },
+    comp: { ...EMPTY, legumes: 200, vegetables: 110, nuts: 15, plantOils: 28, refinedBread: 90 },
   },
   {
     id: "beanTacos", source: "restaurant", name: "Calabacita tacos + frijoles",
@@ -232,7 +246,7 @@ export const SEED_DISHES = [
     // manteca, but a kitchen asked for vegetarian beans would use oil instead.
     // It is the single largest lever on this dish's score.
     note: "Three squash tacos on a plate with Mexican rice and refried beans made with lard, with crema and queso fresco.",
-    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8 },
+    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8, whiteRice: 160 },
   },
   {
     id: "cheesePlate", source: "home", name: "Cheese plate",

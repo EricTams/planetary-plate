@@ -9,24 +9,26 @@ import {
   DAILY_KCAL, TARGET_DAY_KCAL,
 } from "./data.js";
 
-/* Total energy in one portion, from the grams entered. Each composition field
-   is priced once — bridge credits are deliberately not applied here, since a
-   bridge food's own grams already carry its calories. */
-export function trackedKcal(comp) {
+/* Total energy in one portion, from the grams entered — every field, inert
+   starches included. Each is priced once; bridge credits are deliberately not
+   applied here, since a bridge food's own grams already carry its calories. */
+export function dishKcal(comp) {
   return ENERGY_GROUPS.reduce((sum, g) => sum + (comp[g.id] || 0) * KCAL_PER_G[g.id], 0);
 }
 
 /* How much of a day this portion is. In auto mode the dish measures itself:
-   its tracked energy over the cost of a full target day, so the targets and
-   ceilings it is scored against always match the size actually entered. The
-   floor keeps an empty dish from dividing by zero; the ceiling stops a single
-   entry from claiming more than a whole day. */
+   all of its energy over the cost of a full target day, so the targets and
+   ceilings it is scored against match the size actually eaten. Inert starch
+   counts here — a plate of white rice occupies the day without earning any of
+   it, which is exactly the cost the taxonomy should charge for it. The floor
+   keeps an empty dish from dividing by zero; the ceiling stops a single entry
+   from claiming more than a whole day. */
 export const MIN_PORTION = 0.05;
 export const MAX_PORTION = 1;
 
 export function portionShare(comp, settings) {
   if (settings.portionMode === "fixed") return settings.portionPct / 100;
-  const raw = trackedKcal(comp) / TARGET_DAY_KCAL;
+  const raw = dishKcal(comp) / TARGET_DAY_KCAL;
   return Math.min(Math.max(raw, MIN_PORTION), MAX_PORTION);
 }
 
@@ -139,9 +141,7 @@ export function scoreEli(comp, bridged, P) {
    is the inert food the taxonomy has no slot for — white rice, bread, pita,
    rice noodles — plus anything simply not entered. */
 export function energyBreakdown(comp, settings) {
-  const auto = settings.portionMode !== "fixed";
   const P = portionShare(comp, settings);
-  const budget = P * DAILY_KCAL;
   const parts = ENERGY_GROUPS
     .map((g) => ({
       ...g,
@@ -150,7 +150,7 @@ export function energyBreakdown(comp, settings) {
       credit: g.creditKey && settings.mode === "evidence" ? settings[g.creditKey] || 0 : 0,
     }))
     .filter((p) => p.kcal > 0.5);
-  const tracked = parts.reduce((s, p) => s + p.kcal, 0);
+  const total = parts.reduce((s, p) => s + p.kcal, 0);
 
   // Ultra-processed is not a slice of the plate but a property cutting across
   // it, so it is reported against the whole daily ceiling rather than a
@@ -165,16 +165,11 @@ export function energyBreakdown(comp, settings) {
   ];
 
   return {
-    auto,
     portion: P,
-    budget,
     parts,
-    tracked,
+    total,
+    inertKcal: parts.filter((p) => p.inert).reduce((s, p) => s + p.kcal, 0),
     upf: { grams: upfG, ceiling: upfCeiling, share: upfG / upfCeiling, sources: upfSources },
-    untracked: Math.max(budget - tracked, 0),
-    over: Math.max(tracked - budget, 0),
-    // the bar scales to whichever is larger, so an overrun stays visible
-    span: Math.max(tracked, budget),
   };
 }
 
