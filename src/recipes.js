@@ -64,9 +64,9 @@ export const RECIPES = {
       { item: "Vegetable oil", amount: "1 tbsp (13 g)", group: "plantOils" },
       { item: "Veggie broth, in place of the water and bouillon", amount: "1.5 cups (360 ml)" },
       { item: "Gochugaru, soy sauce, oyster sauce, black pepper", amount: "to taste" },
-      { item: "White rice, alongside", amount: "400 g cooked", group: "whiteRice" },
+      { item: "White rice, alongside", amount: "400 g cooked, of ~880 g made", group: "whiteRice" },
     ],
-    note: "The tofu and kimchi amounts are as cooked. The daikon and rice are still my estimates, and the remaining quantities come from a reference recipe that is close to but not exactly this version. The eggs are left out.",
+    note: "Two rice-cooker cups go in, about 320 g uncooked and roughly 880 g cooked, but how much of that gets eaten varies — so 400 g between two is a middle estimate rather than a measurement, and at about a third of the energy here it is the least certain figure in the dish. The tofu and kimchi amounts are as cooked; the daikon and the remaining quantities come from a reference recipe close to but not exactly this version. The eggs are left out.",
   },
 
   mapo: {
