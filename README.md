@@ -34,8 +34,12 @@ npm run dev
 
 ## Caveats
 
-Energy densities are rough central values, good enough to separate a 300 kcal
-entry from a 900 kcal one but not nutrition-label accurate. The ELI≈ score
+Promote-group targets and their energy densities are derived from the
+published reference table, so a day at target reconciles to the reference
+energy. Densities for groups outside that table — bridge foods, and the
+capped groups entered directly — remain rough central values, good enough to
+separate a 300 kcal entry from a 900 kcal one but not nutrition-label
+accurate. The ELI≈ score
 follows the published architecture with cutoffs reconstructed from PHD 2.0
 targets, scaled per dish rather than per diet. The ultra-processed ceiling is a
 working number, not a Commission figure. Dishes marked *home cooked* carry

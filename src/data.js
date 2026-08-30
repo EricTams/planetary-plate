@@ -3,17 +3,20 @@ import { COOL, WARM, NEUTRAL, T } from "./theme.js";
 /* Food-group definitions and the seed dish library.
    All quantities are grams as eaten unless a unit says otherwise. */
 
-export const DAILY_KCAL = 2400; // PHD 2.0 reference energy intake
+export const DAILY_KCAL = 2500; // PHD reference energy intake
 
 /* Promote groups — daily targets in grams AS EATEN.
-   Grains and legumes are converted from PHD dry-weight targets
-   (150 g and 75 g dry) at ~2.5x / 2.4x cooked yield. */
+   Grains and legumes are converted from the published dry-weight targets
+   (232 g and 75 g dry) at ~2.5x / 2.4x cooked yield. Every target and every
+   density below is derived from the reference table's own gram and kcal
+   figures, so a day at target reconciles to DAILY_KCAL instead of falling
+   hundreds of kcal short. */
 export const PROMOTE = [
-  { id: "wholeGrains", label: "Whole grains", short: "Grains", unit: "g cooked", target: 375, hint: "PHD 150 g dry ≈ 375 g cooked" },
-  { id: "legumes", label: "Legumes", short: "Legumes", unit: "g cooked", target: 180, hint: "PHD 75 g dry ≈ 180 g cooked · tofu and tempeh count here at full credit" },
+  { id: "wholeGrains", label: "Whole grains", short: "Grains", unit: "g cooked", target: 580, hint: "232 g dry ≈ 580 g cooked · 811 kcal/day" },
+  { id: "legumes", label: "Legumes", short: "Legumes", unit: "g cooked", target: 180, hint: "75 g dry ≈ 180 g cooked · 284 kcal/day · tofu and tempeh count here at full credit" },
   { id: "vegetables", label: "Vegetables", short: "Veg", unit: "g", target: 300, hint: "PHD 300 g (200–600)" },
   { id: "fruits", label: "Fruits", short: "Fruit", unit: "g", target: 200, hint: "PHD 200 g (100–300)" },
-  { id: "nuts", label: "Nuts & peanuts", short: "Nuts", unit: "g", target: 25, hint: "PHD 25 g" },
+  { id: "nuts", label: "Nuts & peanuts", short: "Nuts", unit: "g", target: 50, hint: "50 g (0–75) · 291 kcal/day" },
   { id: "dairy", label: "Dairy", short: "Dairy", unit: "g milk-eq", target: 250, hint: "PHD 250 g (0–500) in milk equivalents — hard cheese ×7, soft cheese ×4, sour cream ×2, yogurt/milk ×1" },
   { id: "plantOils", label: "Unsaturated plant oils", short: "Oils", unit: "g", target: 40, hint: "PHD 40 g (20–80) — seed, olive, sesame, chili oil" },
   { id: "tubers", label: "Starchy roots & tubers", short: "Tubers", unit: "g", target: 50, hint: "PHD 50 g (0–100) — the one restricted plant food" },
@@ -43,9 +46,10 @@ export const CAPS = [
    good enough to tell a 300 kcal entry from a 900 kcal one, not a nutrition
    label. */
 export const KCAL_PER_G = {
-  // promote groups — these feed the headroom displacement term
-  wholeGrains: 1.3, legumes: 1.15, vegetables: 0.35,
-  fruits: 0.6, nuts: 6.0, dairy: 0.7, plantOils: 8.8, tubers: 0.9,
+  // promote groups — each is the reference table's kcal divided by its target,
+  // so target x density reproduces the published per-group energy exactly
+  wholeGrains: 1.40, legumes: 1.58, vegetables: 0.26,
+  fruits: 0.63, nuts: 5.82, dairy: 0.61, plantOils: 8.85, tubers: 0.78,
   // bridge foods
   refinedPasta: 1.6, fieldRoast: 2.2, beyond: 2.5,
   // capped groups entered on their own
@@ -69,13 +73,13 @@ export const BRIDGE = [
 
 /* Graded cutoffs for the limited groups in the adapted ELI score. */
 export const ELI_LIMITED = [
-  { id: "redMeat", target: 15, upper: 30 },
-  { id: "poultry", target: 30, upper: 60 },
-  { id: "fish", target: 30, upper: 100 },
-  { id: "eggs", target: 15, upper: 25 },
+  { id: "redMeat", target: 14, upper: 30 },
+  { id: "poultry", target: 29, upper: 60 },
+  { id: "fish", target: 28, upper: 100 },
+  { id: "eggs", target: 13, upper: 25 },
   { id: "dairy", target: 250, upper: 500 },
   { id: "tubers", target: 50, upper: 100 },
-  { id: "addedSugar", target: 30, upper: 60 },
+  { id: "addedSugar", target: 31, upper: 60 },
   { id: "animalTropFat", target: 6, upper: 12 },
 ];
 
@@ -123,10 +127,12 @@ export const EMPTY = {
 /* Completeness weights are gram-proportional for the emphasised groups.
    Dairy and tubers default to 0 — you cannot earn adherence by eating
    more of them. Their ceilings still bind in headroom. */
+const LARGEST_TARGET = Math.max(...PROMOTE.map((g) => g.target));
+
 export const DEFAULT_WEIGHTS = Object.fromEntries(
   PROMOTE.map((g) => [
     g.id,
-    g.id === "dairy" || g.id === "tubers" ? 0 : +(g.target / 375).toFixed(2),
+    g.id === "dairy" || g.id === "tubers" ? 0 : +(g.target / LARGEST_TARGET).toFixed(2),
   ])
 );
 
