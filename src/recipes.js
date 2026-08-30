@@ -34,7 +34,6 @@ export const RECIPES = {
   },
 
   puttanesca: {
-    placeholder: true,
     servings: 4,
     time: "35 min",
     ingredients: [
@@ -46,13 +45,6 @@ export const RECIPES = {
       { item: "Olive oil", amount: "60 g", group: "plantOils" },
       { item: "Parmesan, grated", amount: "40 g (×7 = 280 milk-eq)", group: "dairy" },
       { item: "Calabrian chili, garlic", amount: "to taste" },
-    ],
-    steps: [
-      "Brown the crumbled Field Roast in olive oil until the edges crisp, then set aside.",
-      "Soften the onion in the same pan, add garlic and Calabrian chili, and let them sizzle without colouring.",
-      "Crush in the tomatoes by hand and simmer 20 minutes until it tightens.",
-      "Stir in the capers, olives and the browned Field Roast. Taste before salting — capers and olives carry it.",
-      "Toss with the pasta and a ladle of its water, off the heat, until glossy. Parmesan at the table.",
     ],
   },
 
@@ -79,7 +71,6 @@ export const RECIPES = {
   },
 
   mapo: {
-    placeholder: true,
     servings: 4,
     time: "30 min",
     ingredients: [
@@ -92,17 +83,9 @@ export const RECIPES = {
       { item: "Douchi, garlic, ginger, Sichuan peppercorn", amount: "to taste" },
       { item: "Cornstarch slurry", amount: "-" },
     ],
-    steps: [
-      "Slip the tofu cubes into salted simmering water and hold them there while you cook — it firms them and stops them breaking.",
-      "Brown the Beyond crumbles hard in oil, then push aside and fry the doubanjiang in the fat until the oil runs red.",
-      "Add douchi, garlic and ginger, then stock. Season and bring to a simmer.",
-      "Drain the tofu and add it with the peas. Simmer 4 minutes, moving the pan rather than stirring.",
-      "Thicken with the slurry in two or three additions. Finish with scallion and ground Sichuan peppercorn off the heat.",
-    ],
   },
 
   chili: {
-    placeholder: true,
     servings: 6,
     time: "1 h 15 min",
     ingredients: [
@@ -117,18 +100,10 @@ export const RECIPES = {
       { item: "Sour cream and cheddar, to top", amount: "≈1.2 kg milk-eq", group: "dairy" },
       { item: "Chipotle in adobo, cumin, oregano", amount: "to taste" },
     ],
-    steps: [
-      "Char the tomatillos and peppers under a broiler until blistered, then chop. Skip this and the chili tastes flat.",
-      "Brown the Beyond in oil in a heavy pot, breaking it up, until it is genuinely browned rather than grey.",
-      "Add the onion, then the chipotle and dry spices, and cook until fragrant.",
-      "Add the tomatoes, charred vegetables, beans and hominy. Simmer uncovered 45 minutes.",
-      "Taste for acid and heat at the end, not the beginning. Top each bowl with sour cream and cheddar.",
-    ],
     note: "Your list: tofu, doubanjiang, scallion, sweet peas, Beyond crumbles in place of pork. Your list: Beyond, three beans, hominy, tomatoes, tomatillos, chipotle, green chiles, jalapeño, bell pepper, corn, with sour cream and cheddar toppings at ≈200 g milk-eq per serving, at 6 servings. The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
   },
 
   gochujangTofu: {
-    placeholder: true,
     servings: 2,
     time: "35 min",
     ingredients: [
@@ -140,13 +115,6 @@ export const RECIPES = {
       { item: "Corn syrup or honey", amount: "24 g", group: "addedSugar" },
       { item: "Sesame seeds", amount: "10 g", group: "nuts" },
       { item: "Soy sauce, garlic, rice vinegar", amount: "to taste" },
-    ],
-    steps: [
-      "Press the tofu properly — 20 minutes under weight. Wet tofu will not crisp.",
-      "Toss the cubes in potato starch until chalky, then shallow-fry until the edges are hard and pale gold.",
-      "Blanch or steam the broccoli 3 minutes and dress it while warm with a little sesame oil and salt.",
-      "Warm the gochujang, corn syrup, soy and garlic into a glaze; it should coat a spoon.",
-      "Toss the tofu in the glaze off the heat so the crust survives. Sesame seeds, then serve over rice.",
     ],
   },
 
@@ -265,7 +233,6 @@ export const RECIPES = {
   },
 
   cheesePlate: {
-    placeholder: true,
     servings: 2,
     time: "10 min",
     ingredients: [
@@ -273,12 +240,6 @@ export const RECIPES = {
       { item: "Walnuts", amount: "44 g", group: "nuts" },
       { item: "Grapes", amount: "140 g", group: "fruits" },
       { item: "Wholegrain crackers", amount: "80 g", group: "wholeGrains" },
-    ],
-    steps: [
-      "Take the cheese out of the fridge an hour ahead — cold cheese tastes of nothing.",
-      "Pick three with different textures rather than three of the same style.",
-      "Cut hard cheeses into wedges and leave soft ones whole with a knife alongside.",
-      "Arrange with the walnuts and grapes and leave it alone.",
     ],
     note: "Your list: cheese at 90 g per serving (≈630 g milk-eq), walnuts, grapes, wholegrain crackers.",
   },

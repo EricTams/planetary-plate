@@ -32,16 +32,6 @@ export default function Recipe({ recipe, dishName, source }) {
         <span>Composition above is one serving.</span>
       </div>
 
-      {recipe.placeholder && (
-        <p style={{
-          fontSize: 12, color: T.muted, margin: "0 0 16px", padding: "9px 12px",
-          border: `1px solid ${T.hair}`, borderRadius: 5, background: "#fff", maxWidth: "72ch",
-        }}>
-          <b style={{ color: T.ink }}>Method is reconstructed.</b> The ingredients and quantities below are
-          yours — they divide down to the composition above exactly. The numbered steps are a plausible
-          reconstruction rather than how you actually cook it, so treat those as the part to correct.
-        </p>
-      )}
 
       <div className="pp-cols">
         <div>
@@ -67,15 +57,21 @@ export default function Recipe({ recipe, dishName, source }) {
         </div>
 
         <div>
-          <div style={{ ...label, marginBottom: 10 }}>Method</div>
-          <ol style={{ margin: 0, paddingLeft: 20, fontSize: 13, lineHeight: 1.55 }}>
-            {recipe.steps.map((step, i) => (
-              <li key={i} style={{ marginBottom: 8, paddingLeft: 2 }}>{step}</li>
-            ))}
-          </ol>
+          {/* Restaurant dishes carry a method so it can be checked against what
+              actually arrives. Home dishes do not — the cook already knows. */}
+          {recipe.steps && (
+            <>
+              <div style={{ ...label, marginBottom: 10 }}>Method</div>
+              <ol style={{ margin: 0, paddingLeft: 20, fontSize: 13, lineHeight: 1.55 }}>
+                {recipe.steps.map((step, i) => (
+                  <li key={i} style={{ marginBottom: 8, paddingLeft: 2 }}>{step}</li>
+                ))}
+              </ol>
+            </>
+          )}
           {recipe.note && (
             <p style={{
-              fontSize: 12, color: T.muted, marginTop: 14, paddingLeft: 11,
+              fontSize: 12, color: T.muted, marginTop: recipe.steps ? 14 : 0, paddingLeft: 11,
               borderLeft: `2px solid ${T.hair}`, maxWidth: "52ch",
             }}>
               {recipe.note}

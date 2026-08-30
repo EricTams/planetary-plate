@@ -98,13 +98,6 @@ export const NEGATIVE_BARS = CAPS
   .filter((c) => !["redMeat", "poultry", "fish", "plantOilsCap"].includes(c.id))
   .map((c, i) => ({ ...c, color: WARM[i] }));
 
-/* Groups that appear in the profile carry a ramp hue; the uncharted meat
-   ceilings stay neutral wherever they show up in the editor. */
-const BAR_COLORS = Object.fromEntries(
-  [...POSITIVE_BARS, ...NEGATIVE_BARS].map((g) => [g.id, g.color])
-);
-export const barColor = (id) => BAR_COLORS[id] || T.muted;
-
 /* Every composition field exactly once, in the order they stack in the
    tracked-energy bar: what a dish delivers, then the bridge foods, then what
    it spends against ceilings. Capped groups read through `from`, so dairy,
@@ -116,6 +109,15 @@ export const ENERGY_GROUPS = [
   ...CAPS.filter((c) => ["redMeat", "poultry", "fish"].includes(c.id))
     .map((c) => ({ id: c.id, label: c.label, color: NEUTRAL.meat })),
 ];
+
+/* Colour for any group id. ENERGY_GROUPS is keyed by composition field, so
+   this resolves dairy, tubers and the bridge foods; the cap ids are added on
+   top because dairy and tubers are charted as dairyCap and tubersCap. */
+const BAR_COLORS = Object.fromEntries([
+  ...ENERGY_GROUPS.map((g) => [g.id, g.color]),
+  ...NEGATIVE_BARS.map((c) => [c.id, c.color]),
+]);
+export const barColor = (id) => BAR_COLORS[id] || T.muted;
 
 export const EMPTY = {
   wholeGrains: 0, legumes: 0, vegetables: 0, fruits: 0, nuts: 0, dairy: 0,
