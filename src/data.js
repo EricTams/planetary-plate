@@ -232,8 +232,8 @@ export const SEED_DISHES = [
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
-    note: "Tofu, doubanjiang, scallion, sweet peas and Beyond crumbles in place of pork.",
-    comp: { ...EMPTY, legumes: 200, vegetables: 60, beyond: 57, plantOils: 15, whiteRice: 200 },
+    note: "Tofu, doubanjiang, scallion, bell pepper and green peas in veggie stock, with Beyond in place of the pork. Rice underneath.",
+    comp: { ...EMPTY, legumes: 198, vegetables: 88, beyond: 42, addedSugar: 2, plantOils: 22, whiteRice: 200 },
   },
   {
     id: "chili", source: "home", name: "Beyond & three-bean chili",
