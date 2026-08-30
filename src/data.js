@@ -227,8 +227,8 @@ export const SEED_DISHES = [
   },
   {
     id: "sundubu", source: "home", name: "Sundubu jjigae",
-    note: "Soft tofu, kimchi and vegetables, no egg, with rice alongside.",
-    comp: { ...EMPTY, legumes: 280, vegetables: 160, plantOils: 8, whiteRice: 200 },
+    note: "Silken tofu, kimchi, daikon and aromatics in veggie broth, with Beyond in place of the pork and no egg. One of two shares of the pot, with rice alongside.",
+    comp: { ...EMPTY, legumes: 175, vegetables: 118, beyond: 40, plantOils: 10, whiteRice: 200 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",

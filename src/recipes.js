@@ -49,16 +49,24 @@ export const RECIPES = {
   },
 
   sundubu: {
-    servings: 1,
+    servings: 2,
     time: "25 min",
     ingredients: [
-      { item: "Soft tofu", amount: "280 g", group: "legumes" },
-      { item: "Kimchi and vegetables", amount: "160 g", group: "vegetables" },
-      { item: "Chili and toasted sesame oil", amount: "8 g", group: "plantOils" },
-      { item: "Kelp stock", amount: "400 ml" },
-      { item: "Gochugaru, garlic, soy sauce", amount: "to taste" },
-      { item: "White rice, alongside", amount: "200 g cooked", group: "whiteRice" },
+      { item: "Silken tofu", amount: "350 g (1 tube)", group: "legumes" },
+      { item: "Beyond ground, in place of the pork", amount: "80 g", group: "beyond" },
+      { item: "Kimchi", amount: "70 g", group: "vegetables" },
+      { item: "Daikon", amount: "50 g", group: "vegetables" },
+      { item: "Green onions", amount: "2 (30 g)", group: "vegetables" },
+      { item: "Green chili and mild red chili", amount: "35 g", group: "vegetables" },
+      { item: "Yellow onion", amount: "1/4 (40 g)", group: "vegetables" },
+      { item: "Minced garlic", amount: "1 tbsp (10 g)", group: "vegetables" },
+      { item: "Toasted sesame oil", amount: "1/2 tbsp (7 g)", group: "plantOils" },
+      { item: "Vegetable oil", amount: "1 tbsp (13 g)", group: "plantOils" },
+      { item: "Veggie broth, in place of the water and bouillon", amount: "1.5 cups (360 ml)" },
+      { item: "Gochugaru, soy sauce, oyster sauce, black pepper", amount: "to taste" },
+      { item: "White rice, alongside", amount: "400 g cooked", group: "whiteRice" },
     ],
+    note: "The kimchi, daikon and rice amounts are my estimates; everything else is from the recipe. The eggs are left out, per the original description of this dish.",
   },
 
   mapo: {
