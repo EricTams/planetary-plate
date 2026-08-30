@@ -8,8 +8,10 @@ export default function Recipe({ recipe, dishName, source }) {
   if (!recipe) {
     return (
       <p style={{ fontSize: 13, color: T.muted, margin: 0, maxWidth: "60ch" }}>
-        No recipe for {dishName} yet. The seeded dishes each carry one — add yours in{" "}
-        <code style={{ fontFamily: FONT.mono, fontSize: 12 }}>src/recipes.js</code>, keyed by the dish id.
+        {dishName} has no entry in{" "}
+        <code style={{ fontFamily: FONT.mono, fontSize: 12 }}>src/recipes.js</code>. Every dish in{" "}
+        <code style={{ fontFamily: FONT.mono, fontSize: 12 }}>src/data.js</code> should have one keyed by its
+        id — this is a gap in the data rather than something to fill in here.
       </p>
     );
   }

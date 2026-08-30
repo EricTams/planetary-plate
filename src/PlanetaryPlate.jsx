@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { T, FONT, label, input, panel, toggle } from "./theme.js";
 import {
-  PROMOTE, CAPS, BRIDGE, EMPTY, POSITIVE_BARS, NEGATIVE_BARS, barColor,
+  PROMOTE, CAPS, BRIDGE, POSITIVE_BARS, NEGATIVE_BARS, barColor,
   DEFAULT_WEIGHTS, DEFAULT_SETTINGS, SEED_DISHES, TARGET_DAY_KCAL,
 } from "./data.js";
 import { scoreDish, energyBreakdown, fmtPct, cappedAmount } from "./scoring.js";
@@ -189,13 +189,6 @@ export default function App() {
   const rename = (dishId, name) =>
     setDishes((ds) => ds.map((d) => (d.id === dishId ? { ...d, name } : d)));
 
-  const addDish = () => {
-    const id = "dish" + Date.now();
-    setDishes((ds) => [...ds, { id, name: "New dish", note: "", comp: { ...EMPTY } }]);
-    setSelectedId(id);
-    setQuery("");
-  };
-
   const plots = {
     profile: {
       tab: "Group profile",
@@ -277,13 +270,9 @@ export default function App() {
       <div className="pp-shell">
         {/* ---------- left: ranked dish list ---------- */}
         <aside className="pp-aside">
-          <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-            <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search dishes"
-              aria-label="Search dishes"
-              style={{ ...input, width: "100%", padding: "8px 10px", fontSize: 13, fontFamily: FONT.sans }} />
-            <button onClick={addDish} title="Add a dish" aria-label="Add a dish"
-              style={{ border: `1px solid ${T.ink}`, background: T.ink, color: T.paper, borderRadius: 4, padding: "0 12px", cursor: "pointer", fontWeight: 700 }}>+</button>
-          </div>
+          <input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Search dishes"
+            aria-label="Search dishes"
+            style={{ ...input, width: "100%", padding: "8px 10px", fontSize: 13, fontFamily: FONT.sans, marginBottom: 12 }} />
 
           <div style={{ ...label, marginBottom: 8 }}>
             {visible.length} {visible.length === 1 ? "dish" : "dishes"} · ranked by composite
