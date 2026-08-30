@@ -50,24 +50,15 @@ export const RECIPES = {
 
   sundubu: {
     servings: 1,
-    time: "20 min",
+    time: "25 min",
     ingredients: [
-      { item: "Soft tofu", amount: "300 g (1 tube)", group: "legumes" },
-      { item: "Kimchi, chopped", amount: "70 g", group: "vegetables" },
-      { item: "Onion, courgette, mushroom", amount: "40 g", group: "vegetables" },
-      { item: "Chili and toasted sesame oil", amount: "18 g", group: "plantOils" },
+      { item: "Soft tofu", amount: "280 g", group: "legumes" },
+      { item: "Kimchi and vegetables", amount: "160 g", group: "vegetables" },
+      { item: "Chili and toasted sesame oil", amount: "8 g", group: "plantOils" },
       { item: "Kelp stock", amount: "400 ml" },
       { item: "Gochugaru, garlic, soy sauce", amount: "to taste" },
       { item: "White rice, alongside", amount: "200 g cooked" },
     ],
-    steps: [
-      "Fry the gochugaru in the oil over low heat for 30 seconds to make chili oil — do not let it scorch.",
-      "Add the kimchi and garlic and fry hard for 2 minutes until it smells sweet rather than sharp.",
-      "Pour in the stock, bring to a boil, add the onion, courgette and mushroom.",
-      "Spoon the tofu in in large curds and simmer 5 minutes without stirring much.",
-      "Serve in the pot, still boiling, with rice alongside.",
-    ],
-    note: "One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
   },
 
   mapo: {
@@ -171,18 +162,21 @@ export const RECIPES = {
       { item: "Sabzi, in a katori", amount: "110 g", group: "vegetables" },
       { item: "Aloo", amount: "70 g", group: "tubers" },
       { item: "Raita", amount: "80 g", group: "dairy" },
+      { item: "Salad", amount: "40 g", group: "vegetables" },
+      { item: "Papad", amount: "2 (25 g), deep-fried" },
+      { item: "Pickle and chutney", amount: "15 g" },
       { item: "Ghee, on the roti and in the tadka", amount: "8 g", group: "animalTropFat" },
-      { item: "Oil, across the tray", amount: "14 g", group: "plantOils" },
-      { item: "White rice side", amount: "skipped" },
+      { item: "Oil, across the tray and the papad", amount: "26 g", group: "plantOils" },
     ],
     steps: [
       "Dal cooked to collapse, then whisked smooth and finished with a tadka of cumin, mustard seed and curry leaf.",
       "Sabzi kept drier than the dal for contrast, with its own tadka.",
       "Aloo fried with cumin and amchur until the edges catch.",
       "Raita whisked with cucumber, salt and roasted cumin.",
+      "Papad fried to order, pickle and salad plated alongside.",
       "Everything arrives at once in katoris with hot roti.",
     ],
-    note: "Portions are the small katoris a thali actually comes in. Roti counts as whole grain, raita as 1× milk-eq. Skipping the white rice side keeps it out as inert.",
+    note: "Portions are the small katoris a thali actually comes in. Roti counts as whole grain, raita as 1× milk-eq. The papad is deep-fried and the pickle is oil-packed, so both land as plant oil without earning anything back.",
   },
 
   mezze: {
@@ -195,7 +189,7 @@ export const RECIPES = {
       { item: "Salad and olives", amount: "110 g", group: "vegetables" },
       { item: "Walnut muhammara", amount: "15 g", group: "nuts" },
       { item: "Olive oil, across the plate", amount: "28 g", group: "plantOils" },
-      { item: "White pita", amount: "alongside" },
+      { item: "White pita", amount: "90 g, inert" },
     ],
     steps: [
       "Falafel from chickpeas soaked overnight and never cooked first, blitzed coarse with onion, parsley and cumin, rested, then fried to order.",

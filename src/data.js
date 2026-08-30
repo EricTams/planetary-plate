@@ -187,9 +187,9 @@ export const SEED_DISHES = [
     comp: { ...EMPTY, vegetables: 235, dairy: 70, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
   },
   {
-    id: "sundubu", source: "restaurant", name: "Sundubu jjigae",
+    id: "sundubu", source: "home", name: "Sundubu jjigae",
     note: "Soft tofu, kimchi and vegetables, no egg, with rice alongside.",
-    comp: { ...EMPTY, legumes: 300, vegetables: 110, plantOils: 18 },
+    comp: { ...EMPTY, legumes: 280, vegetables: 160, plantOils: 8 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
@@ -218,8 +218,8 @@ export const SEED_DISHES = [
   },
   {
     id: "vegThali", source: "restaurant", name: "Veg thali with raita",
-    note: "Dal, sabzi, aloo, roti and raita with ghee, without the white rice side.",
-    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 110, tubers: 70, dairy: 80, plantOils: 14, animalTropFat: 8 },
+    note: "Dal, sabzi, aloo, roti, raita, papad, pickle and salad, with ghee across the tray.",
+    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 150, tubers: 70, dairy: 80, plantOils: 26, animalTropFat: 8 },
   },
   {
     id: "mezze", source: "restaurant", name: "Vegan mezze + falafel",
