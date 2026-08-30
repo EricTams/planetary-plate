@@ -209,16 +209,6 @@ export const SEED_DISHES = [
     comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 120, dairy: 110, plantOils: 15 },
   },
   {
-    id: "salmonBowl", source: "restaurant", name: "Salmon teriyaki bowl",
-    note: "Refined white rice contributes no whole-grain credit.",
-    comp: { ...EMPTY, fish: 140, vegetables: 110, addedSugar: 14, plantOils: 8 },
-  },
-  {
-    id: "pizza", source: "restaurant", name: "Margherita pizza (12\")",
-    note: "Refined crust, tomato and fresh mozzarella — a 12-inch Neapolitan takes ~100 g of mozzarella, ≈400 g milk-eq at the soft-cheese ×4.",
-    comp: { ...EMPTY, dairy: 400, vegetables: 80, plantOils: 10 },
-  },
-  {
     id: "cheesePlate", source: "home", name: "Cheese plate",
     note: "Cheese (90 g ≈ 630 g milk-eq), walnuts, grapes and wholegrain crackers.",
     comp: { ...EMPTY, dairy: 630, nuts: 22, fruits: 70, wholeGrains: 40 },

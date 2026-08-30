@@ -258,46 +258,6 @@ export const RECIPES = {
     note: "Corn tortillas count as whole grain via nixtamalization. The dairy is the part that hides: crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq, not the 45 g previously entered.",
   },
 
-  salmonBowl: {
-    servings: 1,
-    time: "served as one bowl",
-    ingredients: [
-      { item: "Salmon fillet", amount: "140 g", group: "fish" },
-      { item: "White rice", amount: "200 g cooked" },
-      { item: "Broccoli, carrot, edamame", amount: "110 g", group: "vegetables" },
-      { item: "Mirin and sugar, in the glaze", amount: "14 g", group: "addedSugar" },
-      { item: "Neutral oil", amount: "8 g", group: "plantOils" },
-      { item: "Soy sauce, sake, ginger", amount: "to taste" },
-    ],
-    steps: [
-      "Soy, mirin, sake and sugar reduced to a syrupy teriyaki glaze.",
-      "Salmon seared skin-side down until crisp, then turned briefly.",
-      "Glaze spooned over and left to tighten in the residual heat.",
-      "Built over rice with steamed vegetables.",
-    ],
-    note: "White rice contributes no whole-grain credit, and 140 g of salmon in a portion this size pushes hard against the fish ceiling — it is what sinks this bowl.",
-  },
-
-  pizza: {
-    servings: 1,
-    time: "90 seconds in a 450 °C oven",
-    ingredients: [
-      { item: "Pizza dough, refined", amount: "250 g" },
-      { item: "Fresh mozzarella", amount: "100 g (×4 = 400 milk-eq)", group: "dairy" },
-      { item: "San Marzano tomatoes, crushed", amount: "80 g", group: "vegetables" },
-      { item: "Olive oil", amount: "10 g", group: "plantOils" },
-      { item: "Basil, salt", amount: "to taste" },
-    ],
-    steps: [
-      "Oven and stone as hot as they will go — a proper Neapolitan bakes in 90 seconds.",
-      "Tomatoes crushed by hand and seasoned, never cooked; they cook on the pizza.",
-      "Dough stretched by hand from the centre out, rim left untouched.",
-      "Sauced thinly, mozzarella torn over, baked until the crust is blistered and spotted.",
-      "Basil and olive oil after it comes out, never before.",
-    ],
-    note: "A 12-inch Neapolitan takes about 100 g of fresh mozzarella and 80 g of sauce — I had entered 130 g of cheese. Fresh mozzarella is a soft cheese at ×4, so 100 g is 400 g milk-eq: four fifths of the daily dairy ceiling on one pizza. The dough carries no fat, so the animal-fat entry has been removed.",
-  },
-
   cheesePlate: {
     placeholder: true,
     servings: 2,
