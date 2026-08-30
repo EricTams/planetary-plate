@@ -228,7 +228,10 @@ export const SEED_DISHES = [
   },
   {
     id: "beanTacos", source: "restaurant", name: "Calabacita tacos + frijoles",
-    note: "Three squash tacos on a plate with Mexican rice and refried beans, with crema and queso fresco. Assumes the beans are made with lard — worth checking when you next order.",
+    // The lard is an assumption: taquerias normally make frijoles refritos with
+    // manteca, but a kitchen asked for vegetarian beans would use oil instead.
+    // It is the single largest lever on this dish's score.
+    note: "Three squash tacos on a plate with Mexican rice and refried beans made with lard, with crema and queso fresco.",
     comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8 },
   },
   {

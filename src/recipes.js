@@ -67,7 +67,7 @@ export const RECIPES = {
       "Spoon the tofu in in large curds and simmer 5 minutes without stirring much.",
       "Serve in the pot, still boiling, with rice alongside.",
     ],
-    note: "Your list: semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili, parmesan, at 4 servings. One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
+    note: "One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
   },
 
   mapo: {
@@ -100,7 +100,7 @@ export const RECIPES = {
       { item: "Sour cream and cheddar, to top", amount: "≈1.2 kg milk-eq", group: "dairy" },
       { item: "Chipotle in adobo, cumin, oregano", amount: "to taste" },
     ],
-    note: "Your list: tofu, doubanjiang, scallion, sweet peas, Beyond crumbles in place of pork. Your list: Beyond, three beans, hominy, tomatoes, tomatillos, chipotle, green chiles, jalapeño, bell pepper, corn, with sour cream and cheddar toppings at ≈200 g milk-eq per serving, at 6 servings. The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
+    note: "The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
   },
 
   gochujangTofu: {
@@ -137,7 +137,7 @@ export const RECIPES = {
       "Cook and rinse the noodles separately so they do not cloud the bowl.",
       "Noodles, tofu, boiling broth. The herb plate comes on the side and goes in at the table.",
     ],
-    note: "Your list: Aaron & Claire base recipe with extra broccoli — crisped tofu in potato starch, gochujang-soy-corn syrup glaze, dressed broccoli, sesame seeds. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit. That is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten, not what arrives.",
+    note: "Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit, which is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten rather than what arrives.",
   },
 
   cashewTofu: {
@@ -159,7 +159,7 @@ export const RECIPES = {
       "Return the tofu, add the sauce, thicken with a cornstarch slurry.",
       "Cashews in off the heat so they stay crisp.",
     ],
-    note: "A restaurant wok carries far more oil than a home pan — 20 g per order rather than the 12 g previously entered.",
+    note: "A restaurant wok carries far more oil than a home pan — around 20 g per order.",
   },
 
   vegThali: {
@@ -241,6 +241,5 @@ export const RECIPES = {
       { item: "Grapes", amount: "140 g", group: "fruits" },
       { item: "Wholegrain crackers", amount: "80 g", group: "wholeGrains" },
     ],
-    note: "Your list: cheese at 90 g per serving (≈630 g milk-eq), walnuts, grapes, wholegrain crackers.",
   },
 };
