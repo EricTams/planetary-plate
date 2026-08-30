@@ -1,0 +1,318 @@
+/* Recipes keyed by dish id. Amounts are written for the stated serving count
+   and chosen so that one serving lands near that dish's entry in SEED_DISHES —
+   the recipe is where the composition grams come from, so editing one should
+   mean revisiting the other. `group` tags an ingredient with the food group it
+   counts toward; untagged ingredients are inert or trace (spices, aromatics,
+   white rice, water). */
+
+export const RECIPES = {
+  beyaynetu: {
+    servings: 2,
+    time: "2 h, mostly unattended",
+    ingredients: [
+      { item: "Teff injera", amount: "2.5 rounds (≈480 g)", group: "wholeGrains" },
+      { item: "Red lentils, dry — misir wot", amount: "70 g", group: "legumes" },
+      { item: "Yellow split peas, dry — kik alicha", amount: "65 g", group: "legumes" },
+      { item: "Chickpea flour — shiro", amount: "35 g", group: "legumes" },
+      { item: "Collard greens, raw — gomen", amount: "300 g", group: "vegetables" },
+      { item: "Cabbage and carrot — tikil gomen", amount: "170 g", group: "vegetables" },
+      { item: "Potato, diced", amount: "50 g", group: "tubers" },
+      { item: "Onion, finely diced", amount: "200 g" },
+      { item: "Neutral oil", amount: "45 g", group: "plantOils" },
+      { item: "Berbere, turmeric, garlic, ginger", amount: "to taste" },
+    ],
+    steps: [
+      "Sweat the onion dry in a wide pan until it collapses and browns, 15 minutes, before adding any oil — this is what gives the wots their depth.",
+      "Split the onion three ways. For misir wot, add oil and berbere, bloom, then the lentils and water; simmer 30 minutes to a thick stew.",
+      "For kik alicha, add oil, turmeric, garlic and ginger, then the split peas and water; simmer 40 minutes until soft and pale gold.",
+      "For shiro, whisk the chickpea flour into water off the heat, then cook with oil and berbere 15 minutes until it thickens and no longer tastes raw.",
+      "Braise the collards with garlic until tender — 300 g raw cooks down to about two ½-cup mounds. Cook the cabbage, carrot and potato with turmeric until just soft.",
+      "Line a platter with injera and spoon each stew in its own mound. Serve with extra injera for tearing.",
+    ],
+    note: "Sized as a restaurant platter shared by two, not a family batch: five mounds of roughly 60-75 g each per person. The onion is absorbed into the wots and already counted in their weight, so it is left untagged rather than added to vegetables a second time. Traditionally built on niter kibbeh (spiced clarified butter) rather than oil — if you use it, move that weight to animal / tropical fat, where the 12 g/day ceiling will bind.",
+  },
+
+  puttanesca: {
+    placeholder: true,
+    servings: 4,
+    time: "35 min",
+    ingredients: [
+      { item: "Semolina pasta, dry", amount: "440 g", group: "refinedPasta" },
+      { item: "Italian Field Roast sausage", amount: "370 g", group: "fieldRoast" },
+      { item: "Tomatoes, tinned whole", amount: "700 g", group: "vegetables" },
+      { item: "Onion, diced", amount: "200 g", group: "vegetables" },
+      { item: "Capers and olives", amount: "90 g", group: "vegetables" },
+      { item: "Olive oil", amount: "60 g", group: "plantOils" },
+      { item: "Parmesan, grated", amount: "40 g", group: "dairy" },
+      { item: "Calabrian chili, garlic", amount: "to taste" },
+    ],
+    steps: [
+      "Brown the crumbled Field Roast in olive oil until the edges crisp, then set aside.",
+      "Soften the onion in the same pan, add garlic and Calabrian chili, and let them sizzle without colouring.",
+      "Crush in the tomatoes by hand and simmer 20 minutes until it tightens.",
+      "Stir in the capers, olives and the browned Field Roast. Taste before salting — capers and olives carry it.",
+      "Toss with the pasta and a ladle of its water, off the heat, until glossy. Parmesan at the table.",
+    ],
+  },
+
+  sundubu: {
+    servings: 1,
+    time: "20 min",
+    ingredients: [
+      { item: "Soft tofu", amount: "300 g (1 tube)", group: "legumes" },
+      { item: "Kimchi, chopped", amount: "70 g", group: "vegetables" },
+      { item: "Onion, courgette, mushroom", amount: "40 g", group: "vegetables" },
+      { item: "Chili and toasted sesame oil", amount: "12 g", group: "plantOils" },
+      { item: "Kelp stock", amount: "400 ml" },
+      { item: "Gochugaru, garlic, soy sauce", amount: "to taste" },
+      { item: "White rice, alongside", amount: "200 g cooked" },
+    ],
+    steps: [
+      "Fry the gochugaru in the oil over low heat for 30 seconds to make chili oil — do not let it scorch.",
+      "Add the kimchi and garlic and fry hard for 2 minutes until it smells sweet rather than sharp.",
+      "Pour in the stock, bring to a boil, add the onion, courgette and mushroom.",
+      "Spoon the tofu in in large curds and simmer 5 minutes without stirring much.",
+      "Serve in the pot, still boiling, with rice alongside.",
+    ],
+    note: "One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
+  },
+
+  mapo: {
+    placeholder: true,
+    servings: 4,
+    time: "30 min",
+    ingredients: [
+      { item: "Firm tofu, cubed", amount: "800 g", group: "legumes" },
+      { item: "Beyond crumbles", amount: "230 g", group: "beyond" },
+      { item: "Sweet peas", amount: "160 g", group: "vegetables" },
+      { item: "Scallion", amount: "80 g", group: "vegetables" },
+      { item: "Neutral oil", amount: "60 g", group: "plantOils" },
+      { item: "Doubanjiang", amount: "50 g" },
+      { item: "Douchi, garlic, ginger, Sichuan peppercorn", amount: "to taste" },
+      { item: "Cornstarch slurry", amount: "-" },
+    ],
+    steps: [
+      "Slip the tofu cubes into salted simmering water and hold them there while you cook — it firms them and stops them breaking.",
+      "Brown the Beyond crumbles hard in oil, then push aside and fry the doubanjiang in the fat until the oil runs red.",
+      "Add douchi, garlic and ginger, then stock. Season and bring to a simmer.",
+      "Drain the tofu and add it with the peas. Simmer 4 minutes, moving the pan rather than stirring.",
+      "Thicken with the slurry in two or three additions. Finish with scallion and ground Sichuan peppercorn off the heat.",
+    ],
+  },
+
+  chili: {
+    placeholder: true,
+    servings: 6,
+    time: "1 h 15 min",
+    ingredients: [
+      { item: "Beyond mince", amount: "680 g", group: "beyond" },
+      { item: "Kidney, pinto and black beans, cooked", amount: "780 g", group: "legumes" },
+      { item: "Hominy", amount: "390 g", group: "wholeGrains" },
+      { item: "Tomatoes and tomatillos", amount: "1.1 kg", group: "vegetables" },
+      { item: "Bell pepper, jalapeño, green chiles", amount: "500 g", group: "vegetables" },
+      { item: "Onion", amount: "200 g", group: "vegetables" },
+      { item: "Sweetcorn", amount: "-", group: "vegetables" },
+      { item: "Neutral oil", amount: "48 g", group: "plantOils" },
+      { item: "Sour cream and cheddar, to top", amount: "≈1.2 kg milk-eq", group: "dairy" },
+      { item: "Chipotle in adobo, cumin, oregano", amount: "to taste" },
+    ],
+    steps: [
+      "Char the tomatillos and peppers under a broiler until blistered, then chop. Skip this and the chili tastes flat.",
+      "Brown the Beyond in oil in a heavy pot, breaking it up, until it is genuinely browned rather than grey.",
+      "Add the onion, then the chipotle and dry spices, and cook until fragrant.",
+      "Add the tomatoes, charred vegetables, beans and hominy. Simmer uncovered 45 minutes.",
+      "Taste for acid and heat at the end, not the beginning. Top each bowl with sour cream and cheddar.",
+    ],
+    note: "The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
+  },
+
+  gochujangTofu: {
+    placeholder: true,
+    servings: 2,
+    time: "35 min",
+    ingredients: [
+      { item: "Firm tofu, pressed and cubed", amount: "350 g", group: "legumes" },
+      { item: "Broccoli, florets", amount: "400 g", group: "vegetables" },
+      { item: "Potato starch, for dredging", amount: "40 g" },
+      { item: "Neutral oil, for frying", amount: "24 g", group: "plantOils" },
+      { item: "Gochujang", amount: "40 g" },
+      { item: "Corn syrup or honey", amount: "24 g", group: "addedSugar" },
+      { item: "Sesame seeds", amount: "10 g", group: "nuts" },
+      { item: "Soy sauce, garlic, rice vinegar", amount: "to taste" },
+    ],
+    steps: [
+      "Press the tofu properly — 20 minutes under weight. Wet tofu will not crisp.",
+      "Toss the cubes in potato starch until chalky, then shallow-fry until the edges are hard and pale gold.",
+      "Blanch or steam the broccoli 3 minutes and dress it while warm with a little sesame oil and salt.",
+      "Warm the gochujang, corn syrup, soy and garlic into a glaze; it should coat a spoon.",
+      "Toss the tofu in the glaze off the heat so the crust survives. Sesame seeds, then serve over rice.",
+    ],
+  },
+
+  pho: {
+    servings: 1,
+    time: "1 h for the broth, 5 min to assemble",
+    ingredients: [
+      { item: "Fried tofu, cubed", amount: "150 g", group: "legumes" },
+      { item: "Rice noodles", amount: "200 g cooked" },
+      { item: "Bean sprouts, Thai basil, cilantro, scallion", amount: "110 g", group: "vegetables" },
+      { item: "Rock sugar", amount: "5 g", group: "addedSugar" },
+      { item: "Neutral oil", amount: "3 g", group: "plantOils" },
+      { item: "Vegetable broth", amount: "700 ml" },
+      { item: "Charred onion and ginger, star anise, cinnamon, clove", amount: "for the broth" },
+    ],
+    steps: [
+      "Char the onion and ginger directly over a flame until blackened in patches — this is the whole flavour of the broth.",
+      "Toast the whole spices dry, then simmer with the aromatics for 45 minutes and strain.",
+      "Season with soy and rock sugar until it tastes slightly too strong; the noodles will dilute it.",
+      "Cook and rinse the noodles separately so they do not cloud the bowl.",
+      "Noodles, tofu, boiling broth. The herb plate comes on the side and goes in at the table.",
+    ],
+    note: "Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit. That is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten, not what arrives.",
+  },
+
+  cashewTofu: {
+    servings: 1,
+    time: "20 min",
+    ingredients: [
+      { item: "Firm tofu, cubed", amount: "180 g", group: "legumes" },
+      { item: "Cashews", amount: "30 g", group: "nuts" },
+      { item: "Bell pepper, celery, onion", amount: "140 g", group: "vegetables" },
+      { item: "Neutral oil", amount: "20 g", group: "plantOils" },
+      { item: "Sugar", amount: "10 g", group: "addedSugar" },
+      { item: "Soy sauce, Shaoxing, rice vinegar, garlic", amount: "to taste" },
+      { item: "White rice, alongside", amount: "200 g cooked" },
+    ],
+    steps: [
+      "Toast the cashews dry in the wok until they colour, then tip them out.",
+      "Fry the tofu in a hot, heavily oiled wok without moving it until each face sets, then remove.",
+      "Stir-fry the vegetables hard and briefly so they stay snappy.",
+      "Return the tofu, add the sauce, thicken with a cornstarch slurry.",
+      "Cashews in off the heat so they stay crisp.",
+    ],
+    note: "A restaurant wok carries far more oil than a home pan — 20 g per order rather than the 12 g previously entered.",
+  },
+
+  vegThali: {
+    servings: 1,
+    time: "served as one tray",
+    ingredients: [
+      { item: "Dal, in a katori", amount: "150 g", group: "legumes" },
+      { item: "Roti", amount: "90 g (2)", group: "wholeGrains" },
+      { item: "Sabzi, in a katori", amount: "110 g", group: "vegetables" },
+      { item: "Aloo", amount: "70 g", group: "tubers" },
+      { item: "Raita", amount: "80 g", group: "dairy" },
+      { item: "Ghee and oil, across the tray", amount: "20 g", group: "plantOils" },
+      { item: "White rice side", amount: "skipped" },
+    ],
+    steps: [
+      "Dal cooked to collapse, then whisked smooth and finished with a tadka of cumin, mustard seed and curry leaf.",
+      "Sabzi kept drier than the dal for contrast, with its own tadka.",
+      "Aloo fried with cumin and amchur until the edges catch.",
+      "Raita whisked with cucumber, salt and roasted cumin.",
+      "Everything arrives at once in katoris with hot roti.",
+    ],
+    note: "Portions are the small katoris a thali actually comes in. Roti counts as whole grain, raita as 1× milk-eq. Skipping the white rice side keeps it out as inert.",
+  },
+
+  mezze: {
+    servings: 1,
+    time: "served as one plate",
+    ingredients: [
+      { item: "Hummus", amount: "80 g", group: "legumes" },
+      { item: "Falafel", amount: "100 g (4)", group: "legumes" },
+      { item: "Mercimek köfte", amount: "20 g", group: "legumes" },
+      { item: "Salad and olives", amount: "110 g", group: "vegetables" },
+      { item: "Walnut muhammara", amount: "15 g", group: "nuts" },
+      { item: "Olive oil, across the plate", amount: "28 g", group: "plantOils" },
+      { item: "White pita", amount: "alongside" },
+    ],
+    steps: [
+      "Falafel from chickpeas soaked overnight and never cooked first, blitzed coarse with onion, parsley and cumin, rested, then fried to order.",
+      "Hummus blended long with ice water and tahini until it turns pale and aerated.",
+      "Mercimek köfte worked from red lentils and fine bulgur with pepper paste, shaped into quenelles.",
+      "Muhammara blended from roasted pepper, walnut, breadcrumb and pomegranate molasses.",
+      "Plated together with the salad and olives, finished with a heavy pour of olive oil.",
+    ],
+    note: "The olive oil pour is the part home cooks underestimate — a mezze plate carries close to 30 g across the spreads.",
+  },
+
+  beanTacos: {
+    servings: 1,
+    time: "served as three tacos plus a side",
+    ingredients: [
+      { item: "Corn tortillas", amount: "90 g (3)", group: "wholeGrains" },
+      { item: "Refried beans, side", amount: "120 g", group: "legumes" },
+      { item: "Calabacita squash, corn, onion, tomato", amount: "120 g", group: "vegetables" },
+      { item: "Crema", amount: "30 g (×2 = 60 milk-eq)", group: "dairy" },
+      { item: "Queso fresco", amount: "12 g (×4 = 48 milk-eq)", group: "dairy" },
+      { item: "Neutral oil", amount: "15 g", group: "plantOils" },
+      { item: "Garlic, epazote, chili", amount: "to taste" },
+    ],
+    steps: [
+      "Squash cooked on the plancha with onion, garlic, corn and tomato until it fries rather than steams.",
+      "Beans warmed with a splash of their liquid until spoonable.",
+      "Tortillas heated on the comal until they blister and puff.",
+      "Filled, then finished with crema and crumbled queso fresco.",
+    ],
+    note: "Corn tortillas count as whole grain via nixtamalization. The dairy is the part that hides: crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq, not the 45 g previously entered.",
+  },
+
+  salmonBowl: {
+    servings: 1,
+    time: "served as one bowl",
+    ingredients: [
+      { item: "Salmon fillet", amount: "140 g", group: "fish" },
+      { item: "White rice", amount: "200 g cooked" },
+      { item: "Broccoli, carrot, edamame", amount: "110 g", group: "vegetables" },
+      { item: "Mirin and sugar, in the glaze", amount: "14 g", group: "addedSugar" },
+      { item: "Neutral oil", amount: "8 g", group: "plantOils" },
+      { item: "Soy sauce, sake, ginger", amount: "to taste" },
+    ],
+    steps: [
+      "Soy, mirin, sake and sugar reduced to a syrupy teriyaki glaze.",
+      "Salmon seared skin-side down until crisp, then turned briefly.",
+      "Glaze spooned over and left to tighten in the residual heat.",
+      "Built over rice with steamed vegetables.",
+    ],
+    note: "White rice contributes no whole-grain credit, and 140 g of salmon in a portion this size pushes hard against the fish ceiling — it is what sinks this bowl.",
+  },
+
+  pizza: {
+    servings: 1,
+    time: "90 seconds in a 450 °C oven",
+    ingredients: [
+      { item: "Pizza dough, refined", amount: "250 g" },
+      { item: "Fresh mozzarella", amount: "100 g (×4 = 400 milk-eq)", group: "dairy" },
+      { item: "San Marzano tomatoes, crushed", amount: "80 g", group: "vegetables" },
+      { item: "Olive oil", amount: "10 g", group: "plantOils" },
+      { item: "Basil, salt", amount: "to taste" },
+    ],
+    steps: [
+      "Oven and stone as hot as they will go — a proper Neapolitan bakes in 90 seconds.",
+      "Tomatoes crushed by hand and seasoned, never cooked; they cook on the pizza.",
+      "Dough stretched by hand from the centre out, rim left untouched.",
+      "Sauced thinly, mozzarella torn over, baked until the crust is blistered and spotted.",
+      "Basil and olive oil after it comes out, never before.",
+    ],
+    note: "A 12-inch Neapolitan takes about 100 g of fresh mozzarella and 80 g of sauce — I had entered 130 g of cheese. Fresh mozzarella is a soft cheese at ×4, so 100 g is 400 g milk-eq: four fifths of the daily dairy ceiling on one pizza. The dough carries no fat, so the animal-fat entry has been removed.",
+  },
+
+  cheesePlate: {
+    placeholder: true,
+    servings: 2,
+    time: "10 min",
+    ingredients: [
+      { item: "Assorted cheese", amount: "180 g (≈1.26 kg milk-eq)", group: "dairy" },
+      { item: "Walnuts", amount: "44 g", group: "nuts" },
+      { item: "Grapes", amount: "140 g", group: "fruits" },
+      { item: "Wholegrain crackers", amount: "80 g", group: "wholeGrains" },
+    ],
+    steps: [
+      "Take the cheese out of the fridge an hour ahead — cold cheese tastes of nothing.",
+      "Pick three with different textures rather than three of the same style.",
+      "Cut hard cheeses into wedges and leave soft ones whole with a knife alongside.",
+      "Arrange with the walnuts and grapes and leave it alone.",
+    ],
+  },
+};
