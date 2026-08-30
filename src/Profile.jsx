@@ -32,7 +32,8 @@ export default function Profile({ dish }) {
     return {
       key: g.id, x: posX(i), short: g.short, color: g.color,
       ratio: target > 0 ? delivered / target : 0,
-      title: `${g.label}: ${Math.round(delivered)} of ${Math.round(target)} ${g.unit} target`,
+      title: `${g.label} — delivers ${Math.round(delivered)} of a ${Math.round(target)} ${g.unit} target\n` +
+        `${fmtPct(target > 0 ? delivered / target : 0)} of target · bars above the line clip at 150%`,
     };
   });
 
@@ -42,7 +43,8 @@ export default function Profile({ dish }) {
     return {
       key: c.id, x: negX(j), short: c.short, color: c.color,
       ratio: cap > 0 ? amt / cap : 0,
-      title: `${c.label}: ${Math.round(amt)} of ${Math.round(cap)} g ceiling`,
+      title: `${c.label} — spends ${Math.round(amt)} of a ${Math.round(cap)} g ceiling\n` +
+        `${fmtPct(cap > 0 ? amt / cap : 0)} of ceiling${amt > cap ? " · over, shown outlined" : ""}`,
     };
   });
 
@@ -75,7 +77,7 @@ export default function Profile({ dish }) {
         return (
           <g key={b.key}>
             <title>{b.title}</title>
-            <rect x={b.x - barW / 2} y={zero - h} width={barW} height={h} fill={b.color} rx="2" />
+            <rect x={b.x - barW / 2} y={zero - h} width={barW} height={h} fill={b.color} rx="2" style={{ cursor: "help" }} />
             {b.ratio > MAX_RATIO && (
               <path d={`M${b.x - 5},${zero - h - 4} L${b.x + 5},${zero - h - 4} L${b.x},${zero - h - 11} Z`} fill={b.color} />
             )}
@@ -95,7 +97,7 @@ export default function Profile({ dish }) {
           <g key={b.key}>
             <title>{b.title}</title>
             <rect x={b.x - barW / 2} y={zero} width={barW} height={h} fill={b.color} rx="2"
-              stroke={over ? T.ink : "none"} strokeWidth={over ? 1.5 : 0} />
+              stroke={over ? T.ink : "none"} strokeWidth={over ? 1.5 : 0} style={{ cursor: "help" }} />
             {b.ratio > MAX_RATIO && (
               <path d={`M${b.x - 5},${zero + h + 4} L${b.x + 5},${zero + h + 4} L${b.x},${zero + h + 11} Z`} fill={b.color} />
             )}

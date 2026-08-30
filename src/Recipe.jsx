@@ -1,5 +1,5 @@
 import { T, FONT, label } from "./theme.js";
-import { barColor } from "./data.js";
+import { barColor, groupLabel } from "./data.js";
 
 /* Recipe for one dish. Ingredients carry the swatch of the food group they
    count toward, so the line between what you cook and what gets scored stays
@@ -39,8 +39,11 @@ export default function Recipe({ recipe, dishName, source }) {
           {recipe.ingredients.map((ing) => (
             <div key={ing.item}
               style={{ display: "flex", gap: 9, alignItems: "baseline", marginBottom: 7, fontSize: 13 }}>
-              <span aria-hidden="true" style={{
-                width: 8, height: 8, borderRadius: 2, marginTop: 5, flexShrink: 0,
+              <span title={ing.group
+                ? `Counts toward ${groupLabel(ing.group).toLowerCase()}`
+                : "Inert or trace — counts toward nothing"}
+                style={{ cursor: "help",
+                width: 8, height: 8, borderRadius: 2, marginTop: 5, flexShrink: 0, display: "inline-block",
                 background: ing.group ? barColor(ing.group) : "transparent",
                 border: ing.group ? "none" : `1px solid ${T.hair}`,
               }} />
@@ -50,10 +53,6 @@ export default function Recipe({ recipe, dishName, source }) {
               </span>
             </div>
           ))}
-          <p style={{ fontSize: 11, color: T.muted, marginTop: 12, maxWidth: "44ch" }}>
-            A filled swatch marks an ingredient that counts toward a scored group; an outlined one is inert
-            or trace.
-          </p>
         </div>
 
         <div>

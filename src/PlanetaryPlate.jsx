@@ -9,8 +9,16 @@ import Profile from "./Profile.jsx";
 import Recipe from "./Recipe.jsx";
 import { RECIPES } from "./recipes.js";
 
+/* Why each bridge dial sits where it does — shown on hover rather than as
+   standing prose. */
+const BRIDGE_RATIONALE = {
+  refinedPasta: "Judgment dial, not a measurement. Refined pasta earns low-GI behaviour from its dense gluten-starch matrix, but none of whole grain's fibre.",
+  fieldRoast: "Judgment dial, not a measurement. Wheat gluten does legumes' protein-source job and none of their fibre or phytochemicals.",
+  beyond: "Judgment dial, not a measurement. Pea protein is legume-origin, but the isolate strips the fibre out.",
+};
+
 /* ---------- Scatter field, shared by both plot views ---------- */
-function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel, yLabel }) {
+function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel, yLabel, xName, yName }) {
   const W = 560, H = 400, pad = { l: 48, r: 18, t: 20, b: 46 };
   const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
   const X = (v) => pad.l + Math.min(Math.max(v, 0), 1) * iw;
@@ -40,7 +48,9 @@ function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel,
 
       {contours.map((c) => (
         <g key={c.k}>
-          <path d={c.d} fill="none" stroke={T.muted} strokeWidth="1" strokeDasharray="3 4" opacity="0.5" />
+          <path d={c.d} fill="none" stroke={T.muted} strokeWidth="1" strokeDasharray="3 4" opacity="0.5">
+            <title>{`Every point on this curve has the same geometric mean of ${c.k}`}</title>
+          </path>
           <text x={X(1) - 4} y={Y(c.k * c.k) - 5} textAnchor="end" fontSize="10" fill={T.muted} fontFamily={FONT.mono}>
             {c.k}
           </text>
@@ -59,6 +69,7 @@ function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel,
           <g key={d.id} onClick={() => onSelect(d.id)}
             onMouseEnter={() => onHover(d.id)} onMouseLeave={() => onHover(null)}
             style={{ cursor: "pointer" }}>
+            <title>{`${d.name}\n${xName} ${fmtPct(x(d))} · ${yName} ${fmtPct(y(d))}`}</title>
             <circle cx={X(x(d))} cy={Y(y(d))} r={active ? 8.5 : 5.5}
               fill={T.ink} fillOpacity={active ? 1 : 0.45}
               stroke={T.ink} strokeWidth={active ? 2 : 0} />
@@ -218,27 +229,20 @@ export default function App() {
   const plots = {
     profile: {
       tab: "Group profile",
-      caption: "Twelve food groups for the selected dish. Bars above the line are what it delivers " +
-        "against each target; bars below are what it spends against each ceiling. Both halves share a " +
-        "scale clipped at 150%, and the dashed line marks 100%. Red meat, poultry and fish are omitted.",
     },
     field: {
       tab: "Headroom × completeness",
       x: (d) => d.score.headroom, y: (d) => d.score.completeness,
       xLabel: "Headroom → how much fits in a full-target day",
       yLabel: "Completeness → how much it delivers",
-      caption: "Dashed curves are lines of equal composite score. Headroom binds either on a hard cap " +
-        "(fish, eggs, sugar…) or on displacement — a dish that delivers little must leave room in the day " +
-        "for everything it is missing.",
+      xName: "headroom", yName: "completeness",
     },
     eli: {
       tab: "Composite vs ELI≈",
       x: (d) => d.score.composite, y: (d) => d.score.eli,
       xLabel: "Composite (headroom × completeness)",
       yLabel: "ELI≈ (adapted adherence)",
-      caption: "The same construction against the adapted ELI score, so dishes toward the upper right " +
-        "score well by both readings. Disagreement between the axes is the interesting part: ELI≈ rewards " +
-        "restraint on limited groups, which the composite prices only through headroom.",
+      xName: "composite", yName: "ELI≈",
     },
   };
   const view = plots[plot];
@@ -353,9 +357,9 @@ export default function App() {
               ) : (
                 <Scatter scored={scored} selectedId={selected?.id} hoverId={hoverId}
                   onSelect={setSelectedId} onHover={setHoverId}
-                  x={view.x} y={view.y} xLabel={view.xLabel} yLabel={view.yLabel} />
+                  x={view.x} y={view.y} xLabel={view.xLabel} yLabel={view.yLabel}
+                  xName={view.xName} yName={view.yName} />
               )}
-              <p style={{ margin: "10px 0 0", fontSize: 12, color: T.muted }}>{view.caption}</p>
             </div>
           </section>
 
@@ -483,9 +487,6 @@ export default function App() {
                       </div>
                     );
                   })}
-                  <p style={{ fontSize: 11, color: T.muted, marginTop: 12, maxWidth: "60ch" }}>
-                    White rice, bread and rice noodles are inert — neither credited nor capped.
-                  </p>
                 </div>
               </div>
               )}
@@ -517,16 +518,11 @@ export default function App() {
                           <input type="number" min="0" max="1" step="0.05" value={settings[b.creditKey]}
                             onChange={(e) => setSettings((s) => ({ ...s, [b.creditKey]: Math.max(0, Number(e.target.value) || 0) }))}
                             style={input} aria-label={`${b.label} credit`} />
-                          <span style={{ fontSize: 13 }}>
+                          <span style={{ fontSize: 13, cursor: "help" }} title={BRIDGE_RATIONALE[b.id]}>
                             {b.label} → {b.creditsTo === "wholeGrains" ? "whole grains" : "legumes"}
                           </span>
                         </div>
                       ))}
-                      <p style={{ fontSize: 12, color: T.muted, marginTop: 8, maxWidth: "60ch" }}>
-                        Judgment dials, not measurements. Pasta earns low-GI behavior but not whole-grain fiber;
-                        wheat gluten does legumes' protein job without their fiber; pea isolate is legume-origin
-                        but fiber-stripped.
-                      </p>
                     </>
                   )}
                   <div style={{ ...label, margin: "16px 0 8px" }}>Reference portion</div>
@@ -536,10 +532,15 @@ export default function App() {
                       { id: "fixed", name: "Fixed share" },
                     ].map((m) => (
                       <button key={m.id} onClick={() => setSettings((s) => ({ ...s, portionMode: m.id }))}
+                        title={m.id === "auto"
+                          ? `Each dish is priced into calories and divided by the ${Math.round(TARGET_DAY_KCAL)} kcal a day at every target costs, and that share scales its own targets and ceilings.`
+                          : "One assumed share for every dish. A dish whose grams say otherwise reads as over- or under-delivering against a size it never had."}
                         style={toggle((settings.portionMode !== "fixed") === (m.id === "auto"))}>{m.name}</button>
                     ))}
                   </div>
-                  {settings.portionMode === "fixed" ? (
+                  {/* auto mode needs no readout here — the derived share is on the
+                      dish's Completeness stat and in the energy-bar header */}
+                  {settings.portionMode === "fixed" && (
                     <>
                       <div style={{ fontSize: 13, marginBottom: 6 }}>
                         Every dish treated as {settings.portionPct}% of a day
@@ -548,22 +549,7 @@ export default function App() {
                         onChange={(e) => setSettings((s) => ({ ...s, portionPct: Number(e.target.value) }))}
                         aria-label="Reference portion as a percentage of daily energy"
                         style={{ width: "100%", accentColor: T.green }} />
-                      <p style={{ fontSize: 12, color: T.muted, maxWidth: "60ch" }}>
-                        One assumed share for every dish. Useful for what-ifs, but a dish whose grams say
-                        otherwise will read as over- or under-delivering against targets scaled to a size it
-                        never had.
-                      </p>
                     </>
-                  ) : (
-                    <p style={{ fontSize: 12, color: T.muted, maxWidth: "60ch" }}>
-                      Each dish sizes itself. Its entered grams are priced into calories and divided by
-                      the {Math.round(TARGET_DAY_KCAL)} kcal a day hitting every target costs, and the result
-                      scales that dish's targets and ceilings. No portion guesswork, and a bigger plate is held
-                      to proportionally bigger targets rather than flattering itself.
-                      {selected && (
-                        <> {selected.name} comes to <b style={{ color: T.ink }}>{fmtPct(P)}</b> of a day.</>
-                      )}
-                    </p>
                   )}
                 </div>
                 <div>
@@ -573,17 +559,15 @@ export default function App() {
                       <input type="number" min="0" max="1" step="0.05" value={weights[g.id]}
                         onChange={(e) => setWeights((w) => ({ ...w, [g.id]: Math.max(0, Number(e.target.value) || 0) }))}
                         style={input} aria-label={`Weight for ${g.label}`} />
-                      <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ fontSize: 13 }}>{g.label}</div>
+                      <div style={{ flex: 1, minWidth: 0 }}
+                        title={g.id === "dairy" || g.id === "tubers"
+                          ? "Defaults to 0 — its range starts at zero, so adherence cannot be earned by eating more. Its ceiling still binds, and a weight of 0 drops it from headroom's required-day accounting."
+                          : `Gram-proportional: ${g.target} g against the largest target.`}>
+                        <div style={{ fontSize: 13, cursor: "help" }}>{g.label}</div>
                         <div style={{ fontSize: 11, color: T.muted }}>{g.hint}</div>
                       </div>
                     </div>
                   ))}
-                  <p style={{ fontSize: 12, color: T.muted, marginTop: 8, maxWidth: "60ch" }}>
-                    Gram-proportional for the emphasised groups. Dairy and tubers default to 0 because their PHD
-                    ranges start at zero — their ceilings still bind. A weight of 0 also drops a group from
-                    headroom's required-day accounting.
-                  </p>
                 </div>
               </div>
             )}

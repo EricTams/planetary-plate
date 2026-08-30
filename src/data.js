@@ -131,6 +131,9 @@ const BAR_COLORS = Object.fromEntries([
 ]);
 export const barColor = (id) => BAR_COLORS[id] || T.muted;
 
+const GROUP_LABELS = Object.fromEntries(ENERGY_GROUPS.map((g) => [g.id, g.label]));
+export const groupLabel = (id) => GROUP_LABELS[id] || id;
+
 export const EMPTY = {
   wholeGrains: 0, legumes: 0, vegetables: 0, fruits: 0, nuts: 0, dairy: 0,
   plantOils: 0, tubers: 0,
@@ -175,22 +178,22 @@ export const DEFAULT_SETTINGS = {
 export const SEED_DISHES = [
   {
     id: "beyaynetu", source: "restaurant", name: "Beyaynetu (Ethiopian veg combo)",
-    note: "Misir wot, kik alicha, shiro, gomen and tikil gomen on teff injera. One share of a restaurant platter split two ways, at 2.5 rounds of injera between them. Shiro and some wots are built on niter kibbeh, so part of the fat is clarified butter and binds against the 12 g/day animal-fat ceiling.",
+    note: "Misir wot, kik alicha, shiro, gomen and tikil gomen on teff injera, built on niter kibbeh. One share of a restaurant platter split two ways.",
     comp: { ...EMPTY, wholeGrains: 240, legumes: 225, vegetables: 115, plantOils: 16, animalTropFat: 8, tubers: 25 },
   },
   {
     id: "puttanesca", source: "home", name: "Field Roast puttanesca",
-    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili, parmesan. The 40 g of parmesan across four servings is hard cheese at ×7, so it counts as 70 g milk-eq per serving rather than the 10 g entered before.",
+    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili and parmesan.",
     comp: { ...EMPTY, vegetables: 235, dairy: 70, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
   },
   {
     id: "sundubu", source: "restaurant", name: "Sundubu jjigae",
-    note: "Soft tofu, kimchi and vegetables, no egg. White rice alongside is inert.",
+    note: "Soft tofu, kimchi and vegetables, no egg, with rice alongside.",
     comp: { ...EMPTY, legumes: 300, vegetables: 110, plantOils: 18 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
-    note: "Tofu, doubanjiang, scallion, sweet peas, Beyond crumbles in place of pork. White rice alongside is inert.",
+    note: "Tofu, doubanjiang, scallion, sweet peas and Beyond crumbles in place of pork.",
     comp: { ...EMPTY, legumes: 200, vegetables: 60, beyond: 57, plantOils: 15 },
   },
   {
@@ -200,32 +203,32 @@ export const SEED_DISHES = [
   },
   {
     id: "gochujangTofu", source: "home", name: "Gochujang crispy tofu bowl",
-    note: "Crisped tofu in potato starch, gochujang-soy glaze, dressed broccoli, sesame seeds. White rice underneath is inert.",
+    note: "Crisped tofu in potato starch, gochujang-soy glaze, dressed broccoli and sesame seeds.",
     comp: { ...EMPTY, legumes: 175, vegetables: 200, nuts: 5, addedSugar: 12, plantOils: 12 },
   },
   {
     id: "pho", source: "restaurant", name: "Veggie pho with tofu",
-    note: "Veggie broth, fried tofu, straw mushrooms, bean sprouts and herbs. The tofu is deep-fried and carries the oil it absorbed. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit.",
+    note: "Veggie broth, deep-fried tofu, straw mushrooms, bean sprouts and herbs.",
     comp: { ...EMPTY, legumes: 150, vegetables: 110, addedSugar: 10, plantOils: 12 },
   },
   {
     id: "cashewTofu", source: "restaurant", name: "Cashew tofu stir-fry",
-    note: "Tofu, cashews, bell pepper, celery, onion and a soy-based sauce. White rice alongside is inert.",
+    note: "Tofu, cashews, bell pepper, celery, onion and a soy-based sauce.",
     comp: { ...EMPTY, legumes: 180, vegetables: 140, nuts: 30, addedSugar: 10, plantOils: 20 },
   },
   {
     id: "vegThali", source: "restaurant", name: "Veg thali with raita",
-    note: "Dal, sabzi, aloo, roti and raita, without the white rice side. Roti counts as whole grain, raita as 1× milk-eq dairy. The ghee on the roti and in the tadka is clarified butter, so it lands as animal fat.",
+    note: "Dal, sabzi, aloo, roti and raita with ghee, without the white rice side.",
     comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 110, tubers: 70, dairy: 80, plantOils: 14, animalTropFat: 8 },
   },
   {
     id: "mezze", source: "restaurant", name: "Vegan mezze + falafel",
-    note: "Falafel, hummus, mercimek kofte, salad, walnut muhammara and olives. White pita is inert.",
+    note: "Falafel, hummus, mercimek köfte, salad, walnut muhammara and olives.",
     comp: { ...EMPTY, legumes: 200, vegetables: 110, nuts: 15, plantOils: 28 },
   },
   {
     id: "beanTacos", source: "restaurant", name: "Calabacita tacos + frijoles",
-    note: "Three squash tacos on a plate with rice and beans. Corn tortillas count as whole grain via nixtamalization; crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq. The Mexican rice is white, so it earns nothing and only shows as inert energy, but the oil it is fried in still counts. ASSUMPTION: the beans are made with lard, as a taquería normally makes them — worth checking when you next order, because that 8 g against a 4 g ceiling is what governs the score.",
+    note: "Three squash tacos on a plate with Mexican rice and refried beans, with crema and queso fresco. Assumes the beans are made with lard — worth checking when you next order.",
     comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8 },
   },
   {
