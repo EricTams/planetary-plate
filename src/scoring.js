@@ -5,7 +5,7 @@
    Composite = geometric mean, so a near-zero on either axis tanks it. */
 
 import {
-  PROMOTE, CAPS, BRIDGE, KCAL_PER_G, ELI_LIMITED, EMPHASISED, ENERGY_GROUPS,
+  PROMOTE, CAPS, BRIDGE, KCAL_PER_G, ELI_INTERVAL, ELI_FRACTION, ELI_LIMITED, ENERGY_GROUPS,
   DAILY_KCAL, TARGET_DAY_KCAL,
 } from "./data.js";
 
@@ -113,33 +113,49 @@ export function scoreDish(comp, settings, weights) {
   return { headroom, completeness, composite, binding, parts, eli, bridged, portion: P };
 }
 
-/* ELI 2.0–style adherence score (adapted, not the official index).
-   Follows the published architecture — graded 0–3 points per food group,
-   emphasised groups reward intake, limited groups reward restraint, with a
-   penalty band beyond 150% of the upper bound — but with cutoffs
-   reconstructed from PHD 2.0 targets and ranges, per-dish scaling instead
-   of whole-diet intake, and sodium omitted.
-   14 groups × 3 pts = 42, reported as a percentage. */
+/* ELI 2.0 adherence score, using the published band schemes rather than one
+   invented for all groups. Emphasised groups split two ways: vegetables,
+   fruits and oils are graded against their reference interval, while legumes,
+   nuts and wholegrains are graded as fractions of their target. Limited groups
+   are graded against their upper limit, with the penalty band beginning at
+   twice it.
+
+   Adapted in two ways that remain: it is scaled per dish rather than measured
+   over a whole diet, and sodium is left out and fish is graded on restraint
+   rather than intake. 14 groups x 3 pts = 42, reported as a percentage. */
 export function scoreEli(comp, bridged, P) {
   let pts = 0, max = 0;
-  for (const g of EMPHASISED) {
+
+  for (const g of ELI_INTERVAL) {
     const daily = (bridged[g.id] || 0) / P;
-    pts += daily >= g.target ? 3 : daily >= (2 / 3) * g.target ? 2 : daily >= (1 / 3) * g.target ? 1 : 0;
+    pts += daily > g.target ? 3
+      : daily >= g.lower ? 2
+      : daily >= 0.5 * g.lower ? 1
+      : 0;
     max += 3;
   }
+
+  for (const g of ELI_FRACTION) {
+    const daily = (bridged[g.id] || 0) / P;
+    pts += daily > g.target ? 3
+      : daily >= 0.5 * g.target ? 2
+      : daily >= 0.25 * g.target ? 1
+      : 0;
+    max += 3;
+  }
+
   for (const l of ELI_LIMITED) {
     const daily = (comp[l.id] || 0) / P;
-    pts += daily <= l.target ? 3 : daily <= l.upper ? 2 : daily <= 1.5 * l.upper ? 1 : 0;
+    pts += daily < l.target ? 3
+      : daily <= l.upper ? 2
+      : daily <= 2 * l.upper ? 1
+      : 0;
     max += 3;
   }
+
   return pts / max;
 }
 
-/* Tracked vs untracked energy. The reference portion asserts a dish is some
-   share of the day's 2400 kcal; totalling the entered grams at KCAL_PER_G says
-   how much of that budget the composition actually accounts for. The remainder
-   is the inert food the taxonomy has no slot for — white rice, bread, pita,
-   rice noodles — plus anything simply not entered. */
 export function energyBreakdown(comp, settings) {
   const P = portionShare(comp, settings);
   const parts = ENERGY_GROUPS

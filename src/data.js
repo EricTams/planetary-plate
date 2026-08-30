@@ -12,14 +12,14 @@ export const DAILY_KCAL = 2500; // PHD reference energy intake
    figures, so a day at target reconciles to DAILY_KCAL instead of falling
    hundreds of kcal short. */
 export const PROMOTE = [
-  { id: "wholeGrains", label: "Whole grains", short: "Grains", unit: "g cooked", target: 580, hint: "232 g dry ≈ 580 g cooked · 811 kcal/day" },
-  { id: "legumes", label: "Legumes", short: "Legumes", unit: "g cooked", target: 180, hint: "75 g dry ≈ 180 g cooked · 284 kcal/day · tofu and tempeh count here at full credit" },
-  { id: "vegetables", label: "Vegetables", short: "Veg", unit: "g", target: 300, hint: "PHD 300 g (200–600)" },
-  { id: "fruits", label: "Fruits", short: "Fruit", unit: "g", target: 200, hint: "PHD 200 g (100–300)" },
-  { id: "nuts", label: "Nuts & peanuts", short: "Nuts", unit: "g", target: 50, hint: "50 g (0–75) · 291 kcal/day" },
-  { id: "dairy", label: "Dairy", short: "Dairy", unit: "g milk-eq", target: 250, hint: "PHD 250 g (0–500) in milk equivalents — hard cheese ×7, soft cheese ×4, sour cream ×2, yogurt/milk ×1" },
-  { id: "plantOils", label: "Unsaturated plant oils", short: "Oils", unit: "g", target: 40, hint: "PHD 40 g (20–80) — seed, olive, sesame, chili oil" },
-  { id: "tubers", label: "Starchy roots & tubers", short: "Tubers", unit: "g", target: 50, hint: "PHD 50 g (0–100) — the one restricted plant food" },
+  { id: "wholeGrains", label: "Whole grains", short: "Grains", unit: "g cooked", target: 525, hint: "ELI 2.0 210 g dry ≈ 525 g cooked" },
+  { id: "legumes", label: "Legumes", short: "Legumes", unit: "g cooked", target: 180, hint: "ELI 2.0 75 g dry (0–150) ≈ 180 g cooked · tofu and tempeh count here at full credit" },
+  { id: "vegetables", label: "Vegetables", short: "Veg", unit: "g", target: 300, hint: "ELI 2.0 300 g (200–600)" },
+  { id: "fruits", label: "Fruits", short: "Fruit", unit: "g", target: 200, hint: "ELI 2.0 200 g (100–300)" },
+  { id: "nuts", label: "Nuts & peanuts", short: "Nuts", unit: "g", target: 50, hint: "ELI 2.0 50 g (0–75)" },
+  { id: "dairy", label: "Dairy", short: "Dairy", unit: "g milk-eq", target: 250, hint: "ELI 2.0 250 g (0–500) in milk equivalents — cheese ×5, butter ×6.5, cream ×2.7, milk and yogurt ×1" },
+  { id: "plantOils", label: "Unsaturated plant oils", short: "Oils", unit: "g", target: 40, hint: "ELI 2.0 40 g (20–80) — seed, olive, sesame, chili oil" },
+  { id: "tubers", label: "Starchy roots & tubers", short: "Tubers", unit: "g", target: 50, hint: "ELI 2.0 50 g (0–100) — a limited group" },
 ];
 
 /* Capped groups — daily ceilings in grams (range tops of PHD 2.0).
@@ -27,15 +27,15 @@ export const PROMOTE = [
    dairy, plant oils and tubers are entered once and both credited and capped.
    Sodium is excluded by design. */
 export const CAPS = [
-  { id: "redMeat", label: "Red meat", cap: 30, hint: "0–30 g/day (≈200 g/wk)" },
-  { id: "poultry", label: "Poultry", cap: 60, hint: "0–60 g/day" },
-  { id: "fish", label: "Fish & shellfish", cap: 100, hint: "0–100 g/day" },
+  { id: "redMeat", label: "Red meat", cap: 30, hint: "ELI 2.0 15 g (0–30) — beef, pork, lamb" },
+  { id: "poultry", label: "Poultry", cap: 60, hint: "ELI 2.0 30 g (0–60)" },
+  { id: "fish", label: "Fish & shellfish", cap: 100, hint: "ELI 2.0 30 g (0–100) — emphasised in the index, kept limited here by choice" },
   { id: "eggs", label: "Eggs", short: "Eggs", cap: 25, hint: "0–25 g/day" },
-  { id: "dairyCap", label: "Dairy", short: "Dairy", cap: 500, hint: "0–500 g milk-eq/day", from: "dairy" },
+  { id: "dairyCap", label: "Dairy", short: "Dairy", cap: 500, hint: "0–500 g milk-eq/day — cheese ×5, cream ×2.7", from: "dairy" },
   { id: "plantOilsCap", label: "Plant oils (ceiling)", cap: 80, hint: "0–80 g/day", from: "plantOils" },
   { id: "tubersCap", label: "Starchy roots & tubers", short: "Tubers", cap: 100, hint: "0–100 g/day", from: "tubers" },
-  { id: "addedSugar", label: "Added sugar", short: "Sugar", cap: 60, hint: "≤60 g/day" },
-  { id: "animalTropFat", label: "Animal / tropical fat", short: "Sat fat", cap: 12, hint: "butter, ghee, palm, coconut" },
+  { id: "addedSugar", label: "Added sugar", short: "Sugar", cap: 60, hint: "ELI 2.0 30 g, upper 60 assumed at 2× target" },
+  { id: "animalTropFat", label: "Animal / tropical fat", short: "Sat fat", cap: 18, hint: "ELI 2.0 11 g (0–18) — butter, lard, tallow, palm, coconut" },
   { id: "ultraProcessed", label: "Ultra-processed foods", short: "UPF", cap: 250,
     hint: "≈20% of energy — a working number, not a Commission figure" },
 ];
@@ -83,16 +83,41 @@ export const BRIDGE = [
   { id: "beyond", label: "Beyond Burger", unit: "g", creditsTo: "legumes", creditKey: "beyondCredit", upfFraction: 0.8 },
 ];
 
-/* Graded cutoffs for the limited groups in the adapted ELI score. */
+/* ELI 2.0 group tables, transcribed from the published index.
+
+   Three band schemes, not one. Vegetables, fruits and oils are graded against
+   their reference interval; legumes, nuts and wholegrains against fractions of
+   their target; limited groups against their upper limit.
+
+   Fish sits with the emphasised groups in the published index. It is kept on
+   the limited side here by deliberate choice — this library does not count
+   fish as something to be eaten, so requiring it would penalise every dish in
+   it. Sodium is omitted by design for the same kind of reason.
+
+   Legume and wholegrain targets are the cooked equivalents of the published
+   75 g and 210 g dry, so they can be compared against compositions entered as
+   eaten. */
+export const ELI_INTERVAL = [
+  { id: "vegetables", target: 300, lower: 200 },
+  { id: "fruits", target: 200, lower: 100 },
+  { id: "plantOils", target: 40, lower: 20 },
+];
+
+export const ELI_FRACTION = [
+  { id: "legumes", target: 180 },     // 75 g dry
+  { id: "nuts", target: 50 },
+  { id: "wholeGrains", target: 525 }, // 210 g dry
+];
+
 export const ELI_LIMITED = [
-  { id: "redMeat", target: 14, upper: 30 },
-  { id: "poultry", target: 29, upper: 60 },
-  { id: "fish", target: 28, upper: 100 },
-  { id: "eggs", target: 13, upper: 25 },
+  { id: "redMeat", target: 15, upper: 30 },
+  { id: "poultry", target: 30, upper: 60 },
+  { id: "eggs", target: 15, upper: 25 },
+  { id: "fish", target: 30, upper: 100 },
   { id: "dairy", target: 250, upper: 500 },
   { id: "tubers", target: 50, upper: 100 },
-  { id: "addedSugar", target: 31, upper: 60 },
-  { id: "animalTropFat", target: 6, upper: 12 },
+  { id: "animalTropFat", target: 11, upper: 18 },
+  { id: "addedSugar", target: 30, upper: 60 },
 ];
 
 /* Groups that earn adherence by intake. Dairy and tubers are excluded:
@@ -198,7 +223,7 @@ export const SEED_DISHES = [
   {
     id: "puttanesca", source: "home", name: "Field Roast puttanesca",
     note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili and parmesan.",
-    comp: { ...EMPTY, vegetables: 235, dairy: 70, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
+    comp: { ...EMPTY, vegetables: 235, dairy: 50, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
   },
   {
     id: "sundubu", source: "home", name: "Sundubu jjigae",
@@ -246,11 +271,11 @@ export const SEED_DISHES = [
     // manteca, but a kitchen asked for vegetarian beans would use oil instead.
     // It is the single largest lever on this dish's score.
     note: "Three squash tacos on a plate with Mexican rice and refried beans made with lard, with crema and queso fresco.",
-    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8, whiteRice: 160 },
+    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 140, plantOils: 23, animalTropFat: 8, whiteRice: 160 },
   },
   {
     id: "cheesePlate", source: "home", name: "Cheese plate",
-    note: "Cheese (90 g ≈ 630 g milk-eq), walnuts, grapes and wholegrain crackers.",
-    comp: { ...EMPTY, dairy: 630, nuts: 22, fruits: 70, wholeGrains: 40 },
+    note: "Cheese (90 g ≈ 450 g milk-eq), walnuts, grapes and wholegrain crackers.",
+    comp: { ...EMPTY, dairy: 450, nuts: 22, fruits: 70, wholeGrains: 40 },
   },
 ];
