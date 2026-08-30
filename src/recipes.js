@@ -52,9 +52,9 @@ export const RECIPES = {
     servings: 2,
     time: "25 min",
     ingredients: [
-      { item: "Silken tofu", amount: "350 g (1 tube)", group: "legumes" },
+      { item: "Silken tofu", amount: "1 whole tube (350 g)", group: "legumes" },
       { item: "Beyond ground, in place of the pork", amount: "80 g", group: "beyond" },
-      { item: "Kimchi", amount: "70 g", group: "vegetables" },
+      { item: "Kimchi", amount: "3 oz (85 g)", group: "vegetables" },
       { item: "Daikon", amount: "50 g", group: "vegetables" },
       { item: "Green onions", amount: "2 (30 g)", group: "vegetables" },
       { item: "Green chili and mild red chili", amount: "35 g", group: "vegetables" },
@@ -66,7 +66,7 @@ export const RECIPES = {
       { item: "Gochugaru, soy sauce, oyster sauce, black pepper", amount: "to taste" },
       { item: "White rice, alongside", amount: "400 g cooked", group: "whiteRice" },
     ],
-    note: "The kimchi, daikon and rice amounts are my estimates; everything else is from the recipe. The eggs are left out, per the original description of this dish.",
+    note: "The tofu and kimchi amounts are as cooked. The daikon and rice are still my estimates, and the remaining quantities come from a reference recipe that is close to but not exactly this version. The eggs are left out.",
   },
 
   mapo: {
