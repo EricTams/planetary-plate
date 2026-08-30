@@ -166,7 +166,7 @@ export const SEED_DISHES = [
   {
     id: "sundubu", source: "restaurant", name: "Sundubu jjigae",
     note: "Soft tofu, kimchi and vegetables, no egg. White rice alongside is inert.",
-    comp: { ...EMPTY, legumes: 300, vegetables: 110, plantOils: 12 },
+    comp: { ...EMPTY, legumes: 300, vegetables: 110, plantOils: 18 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
@@ -185,8 +185,8 @@ export const SEED_DISHES = [
   },
   {
     id: "pho", source: "restaurant", name: "Veggie pho with tofu",
-    note: "Veggie broth, tofu, straw mushrooms, bean sprouts and herbs. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit.",
-    comp: { ...EMPTY, legumes: 150, vegetables: 110, addedSugar: 5, plantOils: 3 },
+    note: "Veggie broth, fried tofu, straw mushrooms, bean sprouts and herbs. The tofu is deep-fried and carries the oil it absorbed. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit.",
+    comp: { ...EMPTY, legumes: 150, vegetables: 110, addedSugar: 10, plantOils: 12 },
   },
   {
     id: "cashewTofu", source: "restaurant", name: "Cashew tofu stir-fry",
@@ -195,8 +195,8 @@ export const SEED_DISHES = [
   },
   {
     id: "vegThali", source: "restaurant", name: "Veg thali with raita",
-    note: "Dal, sabzi, aloo, roti and raita, without the white rice side. Roti counts as whole grain, raita as 1× milk-eq dairy.",
-    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 110, tubers: 70, dairy: 80, plantOils: 20 },
+    note: "Dal, sabzi, aloo, roti and raita, without the white rice side. Roti counts as whole grain, raita as 1× milk-eq dairy. The ghee on the roti and in the tadka is clarified butter, so it lands as animal fat.",
+    comp: { ...EMPTY, legumes: 150, wholeGrains: 90, vegetables: 110, tubers: 70, dairy: 80, plantOils: 14, animalTropFat: 8 },
   },
   {
     id: "mezze", source: "restaurant", name: "Vegan mezze + falafel",
