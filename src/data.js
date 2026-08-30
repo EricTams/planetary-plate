@@ -155,7 +155,7 @@ export const DEFAULT_SETTINGS = {
 export const SEED_DISHES = [
   {
     id: "beyaynetu", source: "restaurant", name: "Beyaynetu (Ethiopian veg combo)",
-    note: "Misir wot, kik alicha, shiro, gomen and tikil gomen on teff injera. One share of a restaurant platter split two ways, at 2.5 rounds of injera between them. The standard version rather than the fasting one — shiro and some wots are built on niter kibbeh, so part of the fat lands as animal fat and binds against a 12 g/day ceiling.",
+    note: "Misir wot, kik alicha, shiro, gomen and tikil gomen on teff injera. One share of a restaurant platter split two ways, at 2.5 rounds of injera between them. Shiro and some wots are built on niter kibbeh, so part of the fat is clarified butter and binds against the 12 g/day animal-fat ceiling.",
     comp: { ...EMPTY, wholeGrains: 240, legumes: 225, vegetables: 115, plantOils: 16, animalTropFat: 8, tubers: 25 },
   },
   {

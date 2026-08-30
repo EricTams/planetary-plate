@@ -30,7 +30,7 @@ export const RECIPES = {
       "Braise the collards with garlic until tender — 300 g raw cooks down to about two ½-cup mounds. Cook the cabbage, carrot and potato with turmeric until just soft.",
       "Line a platter with injera and spoon each stew in its own mound. Serve with extra injera for tearing.",
     ],
-    note: "Sized as a restaurant platter shared by two, not a family batch: five mounds of roughly 60-75 g each per person. Onion is absorbed into the wots and already counted in their weight, so it is left untagged rather than added to vegetables twice. The niter kibbeh is the thing that decides this dish's score — 8 g per person against a 5 g scaled ceiling is what binds its headroom. Ordered as yetsom beyaynetu on a fasting day it is strictly vegan: swap the niter kibbeh for another 16 g of oil and it scores about 83% instead of 70%.",
+    note: "Sized as a restaurant platter shared by two, not a family batch: five mounds of roughly 60-75 g each per person. Onion is absorbed into the wots and already counted in their weight, so it is left untagged rather than added to vegetables twice. The niter kibbeh decides this dish's score — 8 g per person against a 5 g scaled ceiling is what binds its headroom.",
   },
 
   puttanesca: {
