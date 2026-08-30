@@ -38,8 +38,8 @@ export const RECIPES = {
     time: "35 min",
     ingredients: [
       { item: "Semolina pasta, dry", amount: "440 g", group: "refinedPasta" },
-      { item: "Italian Field Roast sausage", amount: "370 g", group: "fieldRoast" },
-      { item: "Tomatoes, tinned whole", amount: "700 g", group: "vegetables" },
+      { item: "Italian Field Roast sausage", amount: "368 g", group: "fieldRoast" },
+      { item: "Tomatoes, tinned whole", amount: "650 g", group: "vegetables" },
       { item: "Onion, diced", amount: "200 g", group: "vegetables" },
       { item: "Capers and olives", amount: "90 g", group: "vegetables" },
       { item: "Olive oil", amount: "60 g", group: "plantOils" },
