@@ -207,9 +207,9 @@ export const SEED_DISHES = [
     comp: { ...EMPTY, legumes: 175, vegetables: 200, nuts: 5, addedSugar: 12, plantOils: 12 },
   },
   {
-    id: "pho", source: "restaurant", name: "Veggie pho with tofu",
-    note: "Veggie broth, deep-fried tofu, straw mushrooms, bean sprouts and herbs.",
-    comp: { ...EMPTY, legumes: 150, vegetables: 110, addedSugar: 10, plantOils: 12 },
+    id: "pho", source: "home", name: "Veggie pho with tofu",
+    note: "Veggie broth, tofu, straw mushrooms, bean sprouts, herbs and the fixins. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit.",
+    comp: { ...EMPTY, legumes: 150, vegetables: 140, addedSugar: 5, plantOils: 3 },
   },
   {
     id: "cashewTofu", source: "restaurant", name: "Cashew tofu stir-fry",

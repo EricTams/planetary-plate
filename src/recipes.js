@@ -113,22 +113,14 @@ export const RECIPES = {
     servings: 1,
     time: "1 h for the broth, 5 min to assemble",
     ingredients: [
-      { item: "Fried tofu, cubed", amount: "150 g", group: "legumes" },
-      { item: "Rice noodles", amount: "200 g cooked" },
-      { item: "Bean sprouts, Thai basil, cilantro, scallion", amount: "110 g", group: "vegetables" },
-      { item: "Rock sugar, plus hoisin at the table", amount: "10 g", group: "addedSugar" },
-      { item: "Oil absorbed by the fried tofu", amount: "12 g", group: "plantOils" },
-      { item: "Vegetable broth", amount: "700 ml" },
+      { item: "Tofu", amount: "150 g", group: "legumes" },
+      { item: "Straw mushrooms, bean sprouts, herbs and the fixins", amount: "140 g", group: "vegetables" },
+      { item: "Rock sugar", amount: "5 g", group: "addedSugar" },
+      { item: "Neutral oil", amount: "3 g", group: "plantOils" },
+      { item: "Rice noodles", amount: "200 g cooked, inert" },
+      { item: "Veggie broth", amount: "700 ml" },
       { item: "Charred onion and ginger, star anise, cinnamon, clove", amount: "for the broth" },
     ],
-    steps: [
-      "Char the onion and ginger directly over a flame until blackened in patches — this is the whole flavour of the broth.",
-      "Toast the whole spices dry, then simmer with the aromatics for 45 minutes and strain.",
-      "Season with soy and rock sugar until it tastes slightly too strong; the noodles will dilute it.",
-      "Cook and rinse the noodles separately so they do not cloud the bowl.",
-      "Noodles, tofu, boiling broth. The herb plate comes on the side and goes in at the table.",
-    ],
-    note: "Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit, which is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten rather than what arrives.",
   },
 
   cashewTofu: {
