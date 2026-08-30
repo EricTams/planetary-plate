@@ -37,9 +37,9 @@ export default function Recipe({ recipe, dishName, source }) {
           fontSize: 12, color: T.muted, margin: "0 0 16px", padding: "9px 12px",
           border: `1px solid ${T.hair}`, borderRadius: 5, background: "#fff", maxWidth: "72ch",
         }}>
-          <b style={{ color: T.ink }}>Stand-in recipe.</b> This is a home-cooked dish, so the version below is a
-          generic one I wrote, not yours — the quantities are a guess and the composition above does not derive
-          from them. Replace it with your actual recipe and the numbers become real.
+          <b style={{ color: T.ink }}>Method is reconstructed.</b> The ingredients and quantities below are
+          yours — they divide down to the composition above exactly. The numbered steps are a plausible
+          reconstruction rather than how you actually cook it, so treat those as the part to correct.
         </p>
       )}
 

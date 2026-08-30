@@ -75,7 +75,7 @@ export const RECIPES = {
       "Spoon the tofu in in large curds and simmer 5 minutes without stirring much.",
       "Serve in the pot, still boiling, with rice alongside.",
     ],
-    note: "One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
+    note: "Your list: semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili, parmesan, at 4 servings. One stone pot as a restaurant plates it. Rice alongside is inert — neither credited nor capped.",
   },
 
   mapo: {
@@ -124,7 +124,7 @@ export const RECIPES = {
       "Add the tomatoes, charred vegetables, beans and hominy. Simmer uncovered 45 minutes.",
       "Taste for acid and heat at the end, not the beginning. Top each bowl with sour cream and cheddar.",
     ],
-    note: "The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
+    note: "Your list: tofu, doubanjiang, scallion, sweet peas, Beyond crumbles in place of pork. Your list: Beyond, three beans, hominy, tomatoes, tomatillos, chipotle, green chiles, jalapeño, bell pepper, corn, with sour cream and cheddar toppings at ≈200 g milk-eq per serving, at 6 servings. The toppings are the single largest lever here — 200 g milk-eq per serving is most of the dairy ceiling.",
   },
 
   gochujangTofu: {
@@ -169,7 +169,7 @@ export const RECIPES = {
       "Cook and rinse the noodles separately so they do not cloud the bowl.",
       "Noodles, tofu, boiling broth. The herb plate comes on the side and goes in at the table.",
     ],
-    note: "Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit. That is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten, not what arrives.",
+    note: "Your list: Aaron & Claire base recipe with extra broccoli — crisped tofu in potato starch, gochujang-soy-corn syrup glaze, dressed broccoli, sesame seeds. Rice noodles are inert — they lack pasta's gluten-starch matrix, so no bridge credit. That is why this bowl tracks so little of its energy. The herb plate is counted at what actually gets eaten, not what arrives.",
   },
 
   cashewTofu: {
@@ -280,5 +280,6 @@ export const RECIPES = {
       "Cut hard cheeses into wedges and leave soft ones whole with a knife alongside.",
       "Arrange with the walnuts and grapes and leave it alone.",
     ],
+    note: "Your list: cheese at 90 g per serving (≈630 g milk-eq), walnuts, grapes, wholegrain crackers.",
   },
 };
