@@ -103,8 +103,20 @@ export const NEGATIVE_BARS = CAPS
    it spends against ceilings. Capped groups read through `from`, so dairy,
    tubers and plant oils are not counted twice. */
 export const ENERGY_GROUPS = [
-  ...POSITIVE_BARS.map((g) => ({ id: g.id, label: g.label, color: g.color })),
-  ...BRIDGE.map((b) => ({ id: b.id, label: b.label, color: NEUTRAL.bridge })),
+  // each promote group is followed by the bridge foods that credit into it, so
+  // a bridge segment sits beside the category it is standing in for
+  ...POSITIVE_BARS.flatMap((g) => [
+    { id: g.id, label: g.label, color: g.color },
+    ...BRIDGE.filter((b) => b.creditsTo === g.id).map((b) => ({
+      id: b.id,
+      label: b.label,
+      color: NEUTRAL.bridge,
+      creditsTo: g.id,
+      creditsToLabel: g.label,
+      creditColor: g.color,
+      creditKey: b.creditKey,
+    })),
+  ]),
   ...NEGATIVE_BARS.map((c) => ({ id: c.from || c.id, label: c.label, color: c.color })),
   ...CAPS.filter((c) => ["redMeat", "poultry", "fish"].includes(c.id))
     .map((c) => ({ id: c.id, label: c.label, color: NEUTRAL.meat })),

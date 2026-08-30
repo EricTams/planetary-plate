@@ -98,8 +98,27 @@ function EnergyBar({ energy }) {
   const w = (kcal) => `${(kcal / energy.span) * 100}%`;
   const share = energy.budget > 0 ? energy.tracked / energy.budget : 0;
 
+  const upfColor = barColor("ultraProcessed");
+
   return (
     <div>
+      {energy.upf.grams > 0 && (
+        <div style={{ marginBottom: 12 }}>
+          <div style={{ ...label, display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 5 }}>
+            <span style={{ color: upfColor }}>Ultra-processed</span>
+            <span style={{ fontFamily: FONT.mono, textTransform: "none", letterSpacing: 0, color: upfColor }}>
+              {Math.round(energy.upf.grams)} g · {fmtPct(energy.upf.share)} of the {energy.upf.ceiling} g daily ceiling
+            </span>
+          </div>
+          <div style={{ height: 7, background: T.hair, borderRadius: 4, overflow: "hidden" }}>
+            <div style={{
+              height: 7, width: fmtPct(Math.min(energy.upf.share, 1)),
+              background: upfColor, borderRadius: 4,
+            }} />
+          </div>
+        </div>
+      )}
+
       <div style={{ ...label, display: "flex", justifyContent: "space-between", gap: 12, marginBottom: 6 }}>
         <span>Tracked energy</span>
         <span style={{ fontFamily: FONT.mono, textTransform: "none", letterSpacing: 0 }}>
@@ -114,8 +133,20 @@ function EnergyBar({ energy }) {
         overflow: "hidden", border: `1px solid ${T.hair}`, background: T.panel,
       }}>
         {energy.parts.map((p) => (
-          <div key={p.id} title={`${p.label} · ${Math.round(p.kcal)} kcal`}
-            style={{ width: w(p.kcal), background: p.color }} />
+          <div key={p.id}
+            title={p.creditsTo
+              ? `${p.label} · ${Math.round(p.kcal)} kcal · ${Math.round(p.credit * 100)}% credited to ${p.creditsToLabel.toLowerCase()}`
+              : `${p.label} · ${Math.round(p.kcal)} kcal`}
+            style={{ width: w(p.kcal), background: p.color, position: "relative" }}>
+            {/* a bridge food fills from the bottom in its category's colour, to
+                the height of the credit it actually earns */}
+            {p.credit > 0 && (
+              <div style={{
+                position: "absolute", left: 0, right: 0, bottom: 0,
+                height: fmtPct(p.credit), background: p.creditColor,
+              }} />
+            )}
+          </div>
         ))}
         {energy.untracked > 0 && (
           <div title={`Untracked · ${Math.round(energy.untracked)} kcal`}
@@ -134,6 +165,13 @@ function EnergyBar({ energy }) {
       </div>
 
       <p style={{ fontSize: 11, color: T.muted, margin: "6px 0 0", maxWidth: "78ch" }}>
+        {energy.parts.some((p) => p.creditsTo) && (
+          <>
+            A bridge food sits beside the group it stands in for, filled from the bottom in that group's
+            colour to the height of the credit it earns — the slate remainder is the part that counts as
+            nothing.{" "}
+          </>
+        )}
         {energy.auto
           ? `The dish sizes itself: ${Math.round(energy.tracked)} kcal of entered food is ` +
             `${fmtPct(energy.portion)} of a full target day, so every target and ceiling below is scaled to ` +

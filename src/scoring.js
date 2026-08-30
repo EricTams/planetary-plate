@@ -143,15 +143,28 @@ export function energyBreakdown(comp, settings) {
   const P = portionShare(comp, settings);
   const budget = P * DAILY_KCAL;
   const parts = ENERGY_GROUPS
-    .map((g) => ({ ...g, kcal: (comp[g.id] || 0) * KCAL_PER_G[g.id] }))
+    .map((g) => ({
+      ...g,
+      kcal: (comp[g.id] || 0) * KCAL_PER_G[g.id],
+      // what share of a bridge food is actually standing in for its category
+      credit: g.creditKey && settings.mode === "evidence" ? settings[g.creditKey] || 0 : 0,
+    }))
     .filter((p) => p.kcal > 0.5);
   const tracked = parts.reduce((s, p) => s + p.kcal, 0);
+
+  // Ultra-processed is not a slice of the plate but a property cutting across
+  // it, so it is reported against the whole daily ceiling rather than a
+  // portion-scaled one.
+  const upfCeiling = CAPS.find((c) => c.id === "ultraProcessed").cap;
+  const upfG = upfGrams(comp);
+
   return {
     auto,
     portion: P,
     budget,
     parts,
     tracked,
+    upf: { grams: upfG, ceiling: upfCeiling, share: upfG / upfCeiling },
     untracked: Math.max(budget - tracked, 0),
     over: Math.max(tracked - budget, 0),
     // the bar scales to whichever is larger, so an overrun stays visible
