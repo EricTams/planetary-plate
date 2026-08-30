@@ -222,8 +222,8 @@ export const SEED_DISHES = [
   },
   {
     id: "puttanesca", source: "home", name: "Field Roast puttanesca",
-    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, capers, olives, Calabrian chili and parmesan.",
-    comp: { ...EMPTY, vegetables: 235, dairy: 50, refinedPasta: 270, fieldRoast: 92, plantOils: 15 },
+    note: "Semolina pasta, Italian Field Roast, tomatoes, onion, garlic, kalamata olives, capers, Calabrian chillies, anchovies, herbs and parmesan.",
+    comp: { ...EMPTY, vegetables: 269, dairy: 53, refinedPasta: 262, fieldRoast: 92, fish: 4, plantOils: 11 },
   },
   {
     id: "sundubu", source: "home", name: "Sundubu jjigae",
