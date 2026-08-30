@@ -18,18 +18,19 @@ export const RECIPES = {
       { item: "Cabbage and carrot — tikil gomen", amount: "170 g", group: "vegetables" },
       { item: "Potato, diced", amount: "50 g", group: "tubers" },
       { item: "Onion, finely diced", amount: "200 g" },
-      { item: "Neutral oil", amount: "45 g", group: "plantOils" },
+      { item: "Niter kibbeh (spiced clarified butter)", amount: "16 g", group: "animalTropFat" },
+      { item: "Neutral oil", amount: "32 g", group: "plantOils" },
       { item: "Berbere, turmeric, garlic, ginger", amount: "to taste" },
     ],
     steps: [
       "Sweat the onion dry in a wide pan until it collapses and browns, 15 minutes, before adding any oil — this is what gives the wots their depth.",
-      "Split the onion three ways. For misir wot, add oil and berbere, bloom, then the lentils and water; simmer 30 minutes to a thick stew.",
+      "Split the onion three ways. For misir wot, add niter kibbeh and berbere, bloom, then the lentils and water; simmer 30 minutes to a thick stew.",
       "For kik alicha, add oil, turmeric, garlic and ginger, then the split peas and water; simmer 40 minutes until soft and pale gold.",
-      "For shiro, whisk the chickpea flour into water off the heat, then cook with oil and berbere 15 minutes until it thickens and no longer tastes raw.",
+      "For shiro, whisk the chickpea flour into water off the heat, then cook it down with niter kibbeh and berbere for 15 minutes until it thickens and no longer tastes raw.",
       "Braise the collards with garlic until tender — 300 g raw cooks down to about two ½-cup mounds. Cook the cabbage, carrot and potato with turmeric until just soft.",
       "Line a platter with injera and spoon each stew in its own mound. Serve with extra injera for tearing.",
     ],
-    note: "Sized as a restaurant platter shared by two, not a family batch: five mounds of roughly 60-75 g each per person. The onion is absorbed into the wots and already counted in their weight, so it is left untagged rather than added to vegetables a second time. Traditionally built on niter kibbeh (spiced clarified butter) rather than oil — if you use it, move that weight to animal / tropical fat, where the 12 g/day ceiling will bind.",
+    note: "Sized as a restaurant platter shared by two, not a family batch: five mounds of roughly 60-75 g each per person. Onion is absorbed into the wots and already counted in their weight, so it is left untagged rather than added to vegetables twice. The niter kibbeh is the thing that decides this dish's score — 8 g per person against a 5 g scaled ceiling is what binds its headroom. Ordered as yetsom beyaynetu on a fasting day it is strictly vegan: swap the niter kibbeh for another 16 g of oil and it scores about 83% instead of 70%.",
   },
 
   puttanesca: {
