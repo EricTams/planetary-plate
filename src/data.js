@@ -205,8 +205,8 @@ export const SEED_DISHES = [
   },
   {
     id: "beanTacos", source: "restaurant", name: "Calabacita tacos + frijoles",
-    note: "Three squash tacos with a side of refried beans. Corn tortillas count as whole grain via nixtamalization; crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq.",
-    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 120, dairy: 110, plantOils: 15 },
+    note: "Three squash tacos on a plate with rice and beans. Corn tortillas count as whole grain via nixtamalization; crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq. The Mexican rice is white, so it earns nothing and only shows as inert energy, but the oil it is fried in still counts. ASSUMPTION: the beans are made with lard, as a taquería normally makes them — worth checking when you next order, because that 8 g against a 4 g ceiling is what governs the score.",
+    comp: { ...EMPTY, wholeGrains: 90, legumes: 120, vegetables: 135, dairy: 110, plantOils: 23, animalTropFat: 8 },
   },
   {
     id: "cheesePlate", source: "home", name: "Cheese plate",

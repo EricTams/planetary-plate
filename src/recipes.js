@@ -245,19 +245,23 @@ export const RECIPES = {
     ingredients: [
       { item: "Corn tortillas", amount: "90 g (3)", group: "wholeGrains" },
       { item: "Refried beans, side", amount: "120 g", group: "legumes" },
+      { item: "Lard (manteca), in the beans", amount: "8 g", group: "animalTropFat" },
+      { item: "Mexican rice, side", amount: "160 g cooked" },
+      { item: "Tomato and onion, in the rice", amount: "15 g", group: "vegetables" },
       { item: "Calabacita squash, corn, onion, tomato", amount: "120 g", group: "vegetables" },
       { item: "Crema", amount: "30 g (×2 = 60 milk-eq)", group: "dairy" },
       { item: "Queso fresco", amount: "12 g (×4 = 48 milk-eq)", group: "dairy" },
-      { item: "Neutral oil", amount: "15 g", group: "plantOils" },
+      { item: "Neutral oil, on the plancha and in the rice", amount: "23 g", group: "plantOils" },
       { item: "Garlic, epazote, chili", amount: "to taste" },
     ],
     steps: [
       "Squash cooked on the plancha with onion, garlic, corn and tomato until it fries rather than steams.",
-      "Beans warmed with a splash of their liquid until spoonable.",
+      "Beans mashed and fried in rendered lard — the manteca is the point of frijoles refritos, and it is what the score turns on.",
+      "Rice toasted in oil until it smells nutty, then simmered with tomato and onion.",
       "Tortillas heated on the comal until they blister and puff.",
       "Filled, then finished with crema and crumbled queso fresco.",
     ],
-    note: "Corn tortillas count as whole grain via nixtamalization. The dairy is the part that hides: crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq, not the 45 g previously entered.",
+    note: "Corn tortillas count as whole grain via nixtamalization. Two things hide on this plate: the dairy, where crema at ×2 and queso fresco at ×4 come to ≈110 g milk-eq, and the lard in the beans, which breaches the animal-fat ceiling at twice over. The rice earns nothing — white rice is inert — but the oil it is fried in still counts against the plate.",
   },
 
   cheesePlate: {
