@@ -54,7 +54,7 @@ export const RECIPES = {
   },
 
   sundubu: {
-    servings: 2,
+    servings: 4,
     time: "25 min",
     ingredients: [
       { item: "Silken tofu", amount: "1 whole tube (350 g)", group: "legumes" },
@@ -69,13 +69,13 @@ export const RECIPES = {
       { item: "Vegetable oil", amount: "1 tbsp (13 g)", group: "plantOils" },
       { item: "Veggie broth, in place of the water and bouillon", amount: "1.5 cups (360 ml)" },
       { item: "Gochugaru, soy sauce, oyster sauce, black pepper", amount: "to taste" },
-      { item: "White rice, alongside", amount: "400 g cooked, of ~880 g made", group: "whiteRice" },
+      { item: "White rice, alongside", amount: "800 g cooked across the servings", group: "whiteRice" },
     ],
-    note: "Two rice-cooker cups go in, about 320 g uncooked and roughly 880 g cooked, but how much of that gets eaten varies — so 400 g between two is a middle estimate rather than a measurement, and at about a third of the energy here it is the least certain figure in the dish. The tofu and kimchi amounts are as cooked; the daikon and the remaining quantities come from a reference recipe close to but not exactly this version. The eggs are left out.",
+    note: "The pot is eaten across four servings rather than finished in one sitting. Rice is cooked per meal rather than batched — two rice-cooker cups make roughly 880 g, and 200 g per serving is my estimate, the least certain figure here at about a third of the energy. The tofu and kimchi amounts are as cooked; the daikon and the remaining quantities come from a reference recipe close to but not exactly this version. The eggs are left out.",
   },
 
   mapo: {
-    servings: 2,
+    servings: 4,
     time: "30 min",
     ingredients: [
       { item: "Medium-firm tofu", amount: "14 oz block (397 g)", group: "legumes" },
@@ -92,9 +92,9 @@ export const RECIPES = {
       { item: "Veggie stock, in place of the chicken stock", amount: "1 cup (240 ml)" },
       { item: "Doubanjiang, soy sauce, oyster sauce, Shaoxing, black vinegar", amount: "to taste" },
       { item: "Cornstarch slurry", amount: "1 tbsp (8 g)" },
-      { item: "White rice, underneath", amount: "400 g cooked", group: "whiteRice" },
+      { item: "White rice, underneath", amount: "800 g cooked across the servings", group: "whiteRice" },
     ],
-    note: "Four separate oils come to 45 g for the pan — chili, vegetable, Sichuan peppercorn and sesame — which is 22% of the energy here and the largest single thing the earlier estimate had missed. Serving count and the rice are my assumptions; every other quantity is from the recipe. The doubanjiang is a fermented broad-bean paste and carries some oil of its own, counted as trace.",
+    note: "Four separate oils come to 45 g for the pan — chili, vegetable, Sichuan peppercorn and sesame — which is 22% of the energy here and the largest single thing the earlier estimate had missed. The batch is eaten across four servings. Rice is cooked per meal rather than batched, and 200 g per serving is my estimate; every other quantity is from the recipe. The doubanjiang is a fermented broad-bean paste and carries some oil of its own, counted as trace.",
   },
 
   chili: {

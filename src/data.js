@@ -227,13 +227,13 @@ export const SEED_DISHES = [
   },
   {
     id: "sundubu", source: "home", name: "Sundubu jjigae",
-    note: "Silken tofu, kimchi, daikon and aromatics in veggie broth, with Beyond in place of the pork and no egg. One of two shares of the pot, with rice alongside.",
-    comp: { ...EMPTY, legumes: 175, vegetables: 125, beyond: 40, plantOils: 10, whiteRice: 200 },
+    note: "Silken tofu, kimchi, daikon and aromatics in veggie broth, with Beyond in place of the pork and no egg. One of four shares of the pot, with rice alongside.",
+    comp: { ...EMPTY, legumes: 88, vegetables: 63, beyond: 20, plantOils: 5, whiteRice: 200 },
   },
   {
     id: "mapo", source: "home", name: "Vegetarian mapo tofu",
-    note: "Tofu, doubanjiang, scallion, bell pepper and green peas in veggie stock, with Beyond in place of the pork. Rice underneath.",
-    comp: { ...EMPTY, legumes: 198, vegetables: 88, beyond: 42, addedSugar: 2, plantOils: 22, whiteRice: 200 },
+    note: "Tofu, doubanjiang, scallion, bell pepper and green peas in veggie stock, with Beyond in place of the pork. One of four shares of the batch, with rice underneath.",
+    comp: { ...EMPTY, legumes: 99, vegetables: 44, beyond: 21, addedSugar: 1, plantOils: 11, whiteRice: 200 },
   },
   {
     id: "chili", source: "home", name: "Beyond & three-bean chili",
