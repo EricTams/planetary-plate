@@ -1,10 +1,12 @@
 import { T, FONT, label } from "./theme.js";
 import { barColor, groupLabel } from "./data.js";
+import { useTip } from "./Tooltip.jsx";
 
 /* Recipe for one dish. Ingredients carry the swatch of the food group they
    count toward, so the line between what you cook and what gets scored stays
    visible; untagged lines are inert or trace. */
 export default function Recipe({ recipe, dishName, source }) {
+  const tip = useTip();
   if (!recipe) {
     return (
       <p style={{ fontSize: 13, color: T.muted, margin: 0, maxWidth: "60ch" }}>
@@ -39,9 +41,9 @@ export default function Recipe({ recipe, dishName, source }) {
           {recipe.ingredients.map((ing) => (
             <div key={ing.item}
               style={{ display: "flex", gap: 9, alignItems: "baseline", marginBottom: 7, fontSize: 13 }}>
-              <span title={ing.group
+              <span {...tip(ing.group
                 ? `Counts toward ${groupLabel(ing.group).toLowerCase()}`
-                : "Inert or trace — counts toward nothing"}
+                : "Inert or trace — counts toward nothing")}
                 style={{ cursor: "help",
                 width: 8, height: 8, borderRadius: 2, marginTop: 5, flexShrink: 0, display: "inline-block",
                 background: ing.group ? barColor(ing.group) : "transparent",

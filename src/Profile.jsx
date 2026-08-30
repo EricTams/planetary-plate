@@ -1,6 +1,7 @@
 import { T, FONT } from "./theme.js";
 import { POSITIVE_BARS, NEGATIVE_BARS } from "./data.js";
 import { fmtPct, cappedAmount } from "./scoring.js";
+import { useTip } from "./Tooltip.jsx";
 
 /* Group profile — one diverging bar per food group for a single dish.
    Bars rise from the zero line as a share of the scaled promote-target and
@@ -11,6 +12,7 @@ import { fmtPct, cappedAmount } from "./scoring.js";
 const MAX_RATIO = 1.5;
 
 export default function Profile({ dish }) {
+  const tip = useTip();
   const P = dish.score.portion;
   const W = 760, H = 330;
   const pad = { l: 46, r: 16, t: 26, b: 26 };
@@ -75,9 +77,10 @@ export default function Profile({ dish }) {
       {positives.map((b) => {
         const h = px(b.ratio);
         return (
-          <g key={b.key}>
-            <title>{b.title}</title>
-            <rect x={b.x - barW / 2} y={zero - h} width={barW} height={h} fill={b.color} rx="2" style={{ cursor: "help" }} />
+          <g key={b.key} {...tip(b.title)} style={{ cursor: "help" }}>
+            <rect x={b.x - barW / 2} y={zero - h} width={barW} height={h} fill={b.color} rx="2" />
+            {/* an invisible full-height target, so a short or empty bar is still hoverable */}
+            <rect x={b.x - barW / 2} y={pad.t} width={barW} height={zero - pad.t} fill="transparent" />
             {b.ratio > MAX_RATIO && (
               <path d={`M${b.x - 5},${zero - h - 4} L${b.x + 5},${zero - h - 4} L${b.x},${zero - h - 11} Z`} fill={b.color} />
             )}
@@ -94,10 +97,10 @@ export default function Profile({ dish }) {
         const h = px(b.ratio);
         const over = b.ratio > 1;
         return (
-          <g key={b.key}>
-            <title>{b.title}</title>
+          <g key={b.key} {...tip(b.title)} style={{ cursor: "help" }}>
             <rect x={b.x - barW / 2} y={zero} width={barW} height={h} fill={b.color} rx="2"
-              stroke={over ? T.ink : "none"} strokeWidth={over ? 1.5 : 0} style={{ cursor: "help" }} />
+              stroke={over ? T.ink : "none"} strokeWidth={over ? 1.5 : 0} />
+            <rect x={b.x - barW / 2} y={zero} width={barW} height={H - pad.b - zero} fill="transparent" />
             {b.ratio > MAX_RATIO && (
               <path d={`M${b.x - 5},${zero + h + 4} L${b.x + 5},${zero + h + 4} L${b.x},${zero + h + 11} Z`} fill={b.color} />
             )}

@@ -7,6 +7,7 @@ import {
 import { scoreDish, energyBreakdown, fmtPct, cappedAmount } from "./scoring.js";
 import Profile from "./Profile.jsx";
 import Recipe from "./Recipe.jsx";
+import { TooltipProvider, useTip } from "./Tooltip.jsx";
 import { RECIPES } from "./recipes.js";
 
 /* Why each bridge dial sits where it does — shown on hover rather than as
@@ -19,6 +20,7 @@ const BRIDGE_RATIONALE = {
 
 /* ---------- Scatter field, shared by both plot views ---------- */
 function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel, yLabel, xName, yName }) {
+  const tip = useTip();
   const W = 560, H = 400, pad = { l: 48, r: 18, t: 20, b: 46 };
   const iw = W - pad.l - pad.r, ih = H - pad.t - pad.b;
   const X = (v) => pad.l + Math.min(Math.max(v, 0), 1) * iw;
@@ -48,9 +50,11 @@ function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel,
 
       {contours.map((c) => (
         <g key={c.k}>
-          <path d={c.d} fill="none" stroke={T.muted} strokeWidth="1" strokeDasharray="3 4" opacity="0.5">
-            <title>{`Every point on this curve has the same geometric mean of ${c.k}`}</title>
-          </path>
+          <path d={c.d} fill="none" stroke={T.muted} strokeWidth="6" strokeOpacity="0"
+            {...tip(`Every point on this curve has the same geometric mean of ${c.k}`)}
+            style={{ cursor: "help" }} />
+          <path d={c.d} fill="none" stroke={T.muted} strokeWidth="1" strokeDasharray="3 4"
+            opacity="0.5" pointerEvents="none" />
           <text x={X(1) - 4} y={Y(c.k * c.k) - 5} textAnchor="end" fontSize="10" fill={T.muted} fontFamily={FONT.mono}>
             {c.k}
           </text>
@@ -68,8 +72,8 @@ function Scatter({ scored, selectedId, hoverId, onSelect, onHover, x, y, xLabel,
         return (
           <g key={d.id} onClick={() => onSelect(d.id)}
             onMouseEnter={() => onHover(d.id)} onMouseLeave={() => onHover(null)}
+            {...tip(`${d.name}\n${xName} ${fmtPct(x(d))} · ${yName} ${fmtPct(y(d))}`)}
             style={{ cursor: "pointer" }}>
-            <title>{`${d.name}\n${xName} ${fmtPct(x(d))} · ${yName} ${fmtPct(y(d))}`}</title>
             <circle cx={X(x(d))} cy={Y(y(d))} r={active ? 8.5 : 5.5}
               fill={T.ink} fillOpacity={active ? 1 : 0.45}
               stroke={T.ink} strokeWidth={active ? 2 : 0} />
@@ -106,6 +110,7 @@ function Stat({ name, value, caption, color, emphasis }) {
    groups in ramp order; the hatched tail is the budget the composition does
    not account for. */
 function EnergyBar({ energy }) {
+  const tip = useTip();
   const w = (kcal) => `${(kcal / energy.span) * 100}%`;
   const share = energy.budget > 0 ? energy.tracked / energy.budget : 0;
 
@@ -121,8 +126,8 @@ function EnergyBar({ energy }) {
               {Math.round(energy.upf.grams)} g · {fmtPct(energy.upf.share)} of the {energy.upf.ceiling} g daily ceiling
             </span>
           </div>
-          <div title={`Ultra-processed · ${Math.round(energy.upf.grams)} g of the ${energy.upf.ceiling} g daily ceiling\n` +
-                energy.upf.sources.map((u) => `  ${u.label}: ${Math.round(u.grams)} g`).join("\n")}
+          <div {...tip(`Ultra-processed · ${Math.round(energy.upf.grams)} g of the ${energy.upf.ceiling} g daily ceiling\n` +
+                energy.upf.sources.map((u) => `${u.label}: ${Math.round(u.grams)} g`).join("\n"))}
             style={{ height: 7, background: T.hair, borderRadius: 4, overflow: "hidden", cursor: "help" }}>
             <div style={{
               height: 7, width: fmtPct(Math.min(energy.upf.share, 1)),
@@ -147,13 +152,13 @@ function EnergyBar({ energy }) {
       }}>
         {energy.parts.map((p) => (
           <div key={p.id}
-            title={p.creditsTo
+            {...tip(p.creditsTo
               ? `${p.label} · ${Math.round(p.kcal)} kcal\n` +
                 (p.credit > 0
                   ? `${Math.round(p.credit * 100)}% credited to ${p.creditsToLabel.toLowerCase()} — the filled part\n` +
                     `the remaining ${Math.round((1 - p.credit) * 100)}% counts as nothing`
                   : `inert in strict mode — no credit to ${p.creditsToLabel.toLowerCase()}`)
-              : `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.tracked)} of what is tracked`}
+              : `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.tracked)} of what is tracked`)}
             style={{ width: w(p.kcal), background: p.color, position: "relative", cursor: "help" }}>
             {/* a bridge food fills from the bottom in its category's colour, to
                 the height of the credit it actually earns */}
@@ -166,8 +171,8 @@ function EnergyBar({ energy }) {
           </div>
         ))}
         {energy.untracked > 0 && (
-          <div title={`Inert food · ~${Math.round(energy.untracked)} kcal\n` +
-              `white rice, bread, pita and noodles — neither credited nor capped`}
+          <div {...tip(`Inert food · ~${Math.round(energy.untracked)} kcal\n` +
+              `white rice, bread, pita and noodles — neither credited nor capped`)}
             style={{
               width: w(energy.untracked),
               cursor: "help",
@@ -175,7 +180,7 @@ function EnergyBar({ energy }) {
             }} />
         )}
         {energy.over > 0 && (
-          <div title={`Portion budget · ${Math.round(energy.budget)} kcal`}
+          <div {...tip(`Portion budget · ${Math.round(energy.budget)} kcal`)}
             style={{
               position: "absolute", top: 0, bottom: 0, left: w(energy.budget),
               width: 2, background: T.ink,
@@ -196,7 +201,8 @@ function Meter({ ratio, color }) {
 }
 
 /* ------------------------------ UI ------------------------------ */
-export default function App() {
+function Plate() {
+  const tip = useTip();
   const [dishes, setDishes] = useState(SEED_DISHES);
   const [selectedId, setSelectedId] = useState("beyaynetu");
   const [hoverId, setHoverId] = useState(null);
@@ -279,7 +285,7 @@ export default function App() {
           <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
             <span style={{ display: "flex", gap: 2 }}>
               {POSITIVE_BARS.map((g) => (
-                <span key={g.id} title={g.label}
+                <span key={g.id} {...tip(g.label)}
                   style={{ width: 9, height: 14, background: g.color, borderRadius: 2, display: "inline-block" }} />
               ))}
             </span>
@@ -288,7 +294,7 @@ export default function App() {
           <span style={{ display: "flex", alignItems: "center", gap: 7 }}>
             <span style={{ display: "flex", gap: 2 }}>
               {NEGATIVE_BARS.map((c) => (
-                <span key={c.id} title={c.label}
+                <span key={c.id} {...tip(c.label)}
                   style={{ width: 9, height: 14, background: c.color, borderRadius: 2, display: "inline-block" }} />
               ))}
             </span>
@@ -518,7 +524,7 @@ export default function App() {
                           <input type="number" min="0" max="1" step="0.05" value={settings[b.creditKey]}
                             onChange={(e) => setSettings((s) => ({ ...s, [b.creditKey]: Math.max(0, Number(e.target.value) || 0) }))}
                             style={input} aria-label={`${b.label} credit`} />
-                          <span style={{ fontSize: 13, cursor: "help" }} title={BRIDGE_RATIONALE[b.id]}>
+                          <span style={{ fontSize: 13, cursor: "help" }} {...tip(BRIDGE_RATIONALE[b.id])}>
                             {b.label} → {b.creditsTo === "wholeGrains" ? "whole grains" : "legumes"}
                           </span>
                         </div>
@@ -532,9 +538,9 @@ export default function App() {
                       { id: "fixed", name: "Fixed share" },
                     ].map((m) => (
                       <button key={m.id} onClick={() => setSettings((s) => ({ ...s, portionMode: m.id }))}
-                        title={m.id === "auto"
+                        {...tip(m.id === "auto"
                           ? `Each dish is priced into calories and divided by the ${Math.round(TARGET_DAY_KCAL)} kcal a day at every target costs, and that share scales its own targets and ceilings.`
-                          : "One assumed share for every dish. A dish whose grams say otherwise reads as over- or under-delivering against a size it never had."}
+                          : "One assumed share for every dish. A dish whose grams say otherwise reads as over- or under-delivering against a size it never had.")}
                         style={toggle((settings.portionMode !== "fixed") === (m.id === "auto"))}>{m.name}</button>
                     ))}
                   </div>
@@ -560,9 +566,9 @@ export default function App() {
                         onChange={(e) => setWeights((w) => ({ ...w, [g.id]: Math.max(0, Number(e.target.value) || 0) }))}
                         style={input} aria-label={`Weight for ${g.label}`} />
                       <div style={{ flex: 1, minWidth: 0 }}
-                        title={g.id === "dairy" || g.id === "tubers"
+                        {...tip(g.id === "dairy" || g.id === "tubers"
                           ? "Defaults to 0 — its range starts at zero, so adherence cannot be earned by eating more. Its ceiling still binds, and a weight of 0 drops it from headroom's required-day accounting."
-                          : `Gram-proportional: ${g.target} g against the largest target.`}>
+                          : `Gram-proportional: ${g.target} g against the largest target.`)}>
                         <div style={{ fontSize: 13, cursor: "help" }}>{g.label}</div>
                         <div style={{ fontSize: 11, color: T.muted }}>{g.hint}</div>
                       </div>
@@ -575,5 +581,13 @@ export default function App() {
         </main>
       </div>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <TooltipProvider>
+      <Plate />
+    </TooltipProvider>
   );
 }
