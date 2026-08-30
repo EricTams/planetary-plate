@@ -126,7 +126,7 @@ export const RECIPES = {
       { item: "Mild chili, to garnish", amount: "15 g", group: "vegetables" },
       { item: "Ginger", amount: "small knob (10 g)", group: "vegetables" },
       { item: "Potato starch, the part that adheres", amount: "40 g of 1/2 cup", group: "refinedStarch" },
-      { item: "Neutral oil", amount: "1 tbsp (13 g)", group: "plantOils" },
+      { item: "Neutral oil, to coat the tofu for baking", amount: "2 tbsp (26 g)", group: "plantOils" },
       { item: "Toasted sesame oil, tofu and broccoli", amount: "1.5 tbsp (20 g)", group: "plantOils" },
       { item: "Sugar", amount: "1 tbsp (12 g)", group: "addedSugar" },
       { item: "Light corn syrup", amount: "1 tbsp (21 g)", group: "addedSugar" },
@@ -135,7 +135,7 @@ export const RECIPES = {
       { item: "Hot cooked rice", amount: "1 cup (210 g) per serving", group: "whiteRice" },
       { item: "Soft-boiled eggs", amount: "left out" },
     ],
-    note: "Baking rather than frying is why the oil is 1 tbsp where the source recipe divides 4 tbsp through the pan. The potato starch is dredged at 1/2 cup but most stays in the bowl, so 40 g is an estimate of what actually adheres and gets eaten. Broccoli is well above the single head the recipe calls for. The rice quantity is the recipe's own, unlike the other dishes here.",
+    note: "Baking rather than frying is why the oil is 2 tbsp where the source recipe divides 4 tbsp through the pan — less than shallow-frying takes, but enough to coat the tofu and keep it off the tray. The potato starch is dredged at 1/2 cup but most stays in the bowl, so 40 g is an estimate of what actually adheres and gets eaten. Broccoli is well above the single head the recipe calls for. The rice quantity is the recipe's own, unlike the other dishes here.",
   },
 
   pho: {

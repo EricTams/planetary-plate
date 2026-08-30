@@ -244,7 +244,7 @@ export const SEED_DISHES = [
   {
     id: "gochujangTofu", source: "home", name: "Gochujang crispy tofu bowl",
     note: "Baked tofu in potato starch, gochujang-soy-corn syrup glaze, dressed broccoli and sesame seeds, over rice. No egg.",
-    comp: { ...EMPTY, legumes: 132, vegetables: 226, nuts: 4, addedSugar: 11, plantOils: 11, refinedStarch: 13, whiteRice: 210 },
+    comp: { ...EMPTY, legumes: 132, vegetables: 226, nuts: 4, addedSugar: 11, plantOils: 15, refinedStarch: 13, whiteRice: 210 },
   },
   {
     id: "pho", source: "home", name: "Veggie pho with tofu",
