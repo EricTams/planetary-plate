@@ -157,6 +157,12 @@ export function energyBreakdown(comp, settings) {
   // portion-scaled one.
   const upfCeiling = CAPS.find((c) => c.id === "ultraProcessed").cap;
   const upfG = upfGrams(comp);
+  const upfSources = [
+    ...((comp.ultraProcessed || 0) > 0 ? [{ label: "entered directly", grams: comp.ultraProcessed }] : []),
+    ...BRIDGE
+      .filter((b) => (comp[b.id] || 0) > 0 && b.upfFraction)
+      .map((b) => ({ label: b.label, grams: b.upfFraction * comp[b.id] })),
+  ];
 
   return {
     auto,
@@ -164,7 +170,7 @@ export function energyBreakdown(comp, settings) {
     budget,
     parts,
     tracked,
-    upf: { grams: upfG, ceiling: upfCeiling, share: upfG / upfCeiling },
+    upf: { grams: upfG, ceiling: upfCeiling, share: upfG / upfCeiling, sources: upfSources },
     untracked: Math.max(budget - tracked, 0),
     over: Math.max(tracked - budget, 0),
     // the bar scales to whichever is larger, so an overrun stays visible

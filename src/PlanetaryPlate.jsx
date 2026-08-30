@@ -110,7 +110,9 @@ function EnergyBar({ energy }) {
               {Math.round(energy.upf.grams)} g · {fmtPct(energy.upf.share)} of the {energy.upf.ceiling} g daily ceiling
             </span>
           </div>
-          <div style={{ height: 7, background: T.hair, borderRadius: 4, overflow: "hidden" }}>
+          <div title={`Ultra-processed · ${Math.round(energy.upf.grams)} g of the ${energy.upf.ceiling} g daily ceiling\n` +
+                energy.upf.sources.map((u) => `  ${u.label}: ${Math.round(u.grams)} g`).join("\n")}
+            style={{ height: 7, background: T.hair, borderRadius: 4, overflow: "hidden", cursor: "help" }}>
             <div style={{
               height: 7, width: fmtPct(Math.min(energy.upf.share, 1)),
               background: upfColor, borderRadius: 4,
@@ -135,9 +137,13 @@ function EnergyBar({ energy }) {
         {energy.parts.map((p) => (
           <div key={p.id}
             title={p.creditsTo
-              ? `${p.label} · ${Math.round(p.kcal)} kcal · ${Math.round(p.credit * 100)}% credited to ${p.creditsToLabel.toLowerCase()}`
-              : `${p.label} · ${Math.round(p.kcal)} kcal`}
-            style={{ width: w(p.kcal), background: p.color, position: "relative" }}>
+              ? `${p.label} · ${Math.round(p.kcal)} kcal\n` +
+                (p.credit > 0
+                  ? `${Math.round(p.credit * 100)}% credited to ${p.creditsToLabel.toLowerCase()} — the filled part\n` +
+                    `the remaining ${Math.round((1 - p.credit) * 100)}% counts as nothing`
+                  : `inert in strict mode — no credit to ${p.creditsToLabel.toLowerCase()}`)
+              : `${p.label} · ${Math.round(p.kcal)} kcal · ${fmtPct(p.kcal / energy.tracked)} of what is tracked`}
+            style={{ width: w(p.kcal), background: p.color, position: "relative", cursor: "help" }}>
             {/* a bridge food fills from the bottom in its category's colour, to
                 the height of the credit it actually earns */}
             {p.credit > 0 && (
@@ -149,9 +155,11 @@ function EnergyBar({ energy }) {
           </div>
         ))}
         {energy.untracked > 0 && (
-          <div title={`Untracked · ${Math.round(energy.untracked)} kcal`}
+          <div title={`Inert food · ~${Math.round(energy.untracked)} kcal\n` +
+              `white rice, bread, pita and noodles — neither credited nor capped`}
             style={{
               width: w(energy.untracked),
+              cursor: "help",
               background: `repeating-linear-gradient(45deg, ${T.hair} 0 5px, ${T.panel} 5px 10px)`,
             }} />
         )}
@@ -164,26 +172,6 @@ function EnergyBar({ energy }) {
         )}
       </div>
 
-      <p style={{ fontSize: 11, color: T.muted, margin: "6px 0 0", maxWidth: "78ch" }}>
-        {energy.parts.some((p) => p.creditsTo) && (
-          <>
-            A bridge food sits beside the group it stands in for, filled from the bottom in that group's
-            colour to the height of the credit it earns — the slate remainder is the part that counts as
-            nothing.{" "}
-          </>
-        )}
-        {energy.auto
-          ? `The dish sizes itself: ${Math.round(energy.tracked)} kcal of entered food is ` +
-            `${fmtPct(energy.portion)} of a full target day, so every target and ceiling below is scaled to ` +
-            `that. The hatched tail is the ~${Math.round(energy.untracked)} kcal of inert food (white rice, ` +
-            `bread, noodles) a portion this size carries alongside it.`
-          : energy.over > 0
-            ? `${Math.round(energy.over)} kcal past the portion budget — the entered grams come to ${fmtPct(share)} ` +
-              `of what a ${Math.round(energy.budget)} kcal portion holds. The rule marks the budget.`
-            : `${Math.round(energy.untracked)} kcal unattributed — inert foods the taxonomy has no slot for ` +
-              `(white rice, bread, pita, rice noodles) plus anything not entered. A large hatched tail means the ` +
-              `scores below describe only part of the plate.`}
-      </p>
     </div>
   );
 }
